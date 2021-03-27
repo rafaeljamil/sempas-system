@@ -1,0 +1,42 @@
+<h2>Cadastro de <%=cad.nome.nomeCompleto%></h2>
+<div>Apelido: <%=cad.nome.apelido%></div>
+<div>Nome da mãe: <%=cad.nomeMae%></div>
+<div>
+    <div>Documentos:</div>
+    <div>NIS: <%=cad.nis%></div>
+    <div>CPF: <%=cad.cpf%></div>
+    <div>
+        <div>Identidade:</div>
+        <div>Número: <%=cad.rg.numero%></div>
+        <div>Órgão expedidor: <%=cad.rg.orgaoExpedidor%></div>
+        <div>Data de emissão: <%=cad.rg.dataEmissao.toDateString()%></div>
+    </div>
+    <div>Endereço:</div>
+    <div><%=cad.endereco.logradouro%>, <%=cad.endereco.numero%></div>
+    <% if(cad.endereco.complemento != null && cad.endereco.complemento !== '') { %>
+        <div><%=cad.endereco.complemento%></div>
+    <% } %>
+    <div>CEP: <%=cad.endereco.cep%>, <%=cad.endereco.bairro%>, <%=cad.endereco.cidade%>, <%=cad.endereco.estado%></div>
+    <div>Contato:</div>
+    <% if(cad.contatos.fixo != null && cad.contatos.fixo !== '') { %>
+        <div>Telefone: <%=cad.contatos.fixo%></div>
+    <% } %>
+    <div>Celular: <%=cad.contatos.celular%></div>
+    <% if(cad.contatos.email != null && cad.contatos.email !== '') { %>
+        <div>E-mail: <%=cad.contatos.email%></div>
+    <% } %>
+    <div>Cadastrado por <%=cad.criadoPor%> em <%=cad.criadoEm.toDateString()%>.</div>
+</div>
+<div>
+    <h2>Documentos</h2>
+    <% docs.forEach(doc => { %>
+        <img src="<%=doc.rgFrenteImagemPath%>">
+        <img src="<%=doc.rgCostaImagemPath%>">
+        <img src="<%=doc.cpfImagemPath%>">
+        <img src="<%=doc.compResImagemPath%>">
+    <%})%>
+</div>
+<div>
+    <a href="/cadastros/<%=cad.id%>/docs">Documentos</a>
+    <a href="/cadastros/<%=cad.id%>/editar">Editar</a>
+</div>

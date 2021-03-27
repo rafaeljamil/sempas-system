@@ -1,13 +1,15 @@
 const mongoose = require('mongoose')
 
 const usuarioSchema = mongoose.Schema({
-    nome: {
-        type: String,
-        required: true
+    nome: { 
+        nomeCompleto:{ type:String, required: true },
+        apelido:{ type:String }
     },
     rg: {
-        type: Number,
-        required: true
+        numero:{ type: Number, required: true },
+        orgaoExpedidor: { type: String, required: true },
+        uf: { type: String, required: true },
+        dataEmissao:{ type: Date, required: true }
     },
     cpf: {
         type: Number,
@@ -21,62 +23,36 @@ const usuarioSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    end: {
-        logradouro: {
-            type: String,
-            required: true
-        },
-        numero: {
-            type: Number,
-        },
-        complemento: {
-            type: String
-        },
-        cep: {
-            type: Number,
-            required: true
-        },
-        cidade: {
-            type: String,
-            required: true
-        },
-        estado: {
-            type: String,
-            required: true
-        }
+    endereco: {
+        logradouro: { type: String, required: true },
+        numero: { type: Number },
+        complemento: { type: String },
+        cep: { type: Number, required: true },
+        bairro: { type: String, required: true },
+        cidade: { type: String, required: true },
+        estado: { type: String, required: true }
     },
     contatos: {
-        fixo: {
-            type: Number,
-        },
-        celular: {
-            type: Number,
-            required: true
-        },
-        email: {
-            type: String
-        }
+        fixo: { type: Number },
+        celular: { type: Number, required: true },
+        email: { type: String }
     },
     relatorioSocial:{
-        type: mongoose.Schema.Types.ObjectId,
+        type: Boolean,
         required: true,
-        ref: 'relatorioSocial'
-    },
-    documentos:{
-        type: mongoose.Schema.Types.ObjectId,
-        required: true,
-        ref: 'documentos'
+        default: false
     },
     criadoEm: {
         type: Date,
         required: true,
         default: Date.now
     },
-    criadoPor: {
-        type: mongoose.Schema.Types.ObjectId,
-        required: true,
-        ref: 'operador'
-    }
+    // criadoPor: {
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     required: true,
+    //     ref: 'Operador',
+    //     default: 'Default'
+    // }
 })
 
-module.exports = mongoose.Schema('usuario', usuarioSchema)
+module.exports = mongoose.model('Usuario', usuarioSchema)

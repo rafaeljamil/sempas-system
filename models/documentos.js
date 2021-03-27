@@ -1,13 +1,19 @@
 const mongoose = require('mongoose')
 
 const documentosSchema = mongoose.Schema({
-    rgImagem: {
+    rgFrenteImagem: {
         type: Buffer,
         required: true
     },
-    rgImagemTipo: {
+    rgFrenteImagemTipo: {
         type: String,
         required: true
+    },
+    rgCostaImagem:{
+        type: Buffer
+    },
+    rgCostaImagemTipo:{
+        type: Buffer  
     },
     cpfImagem: {
         type: Buffer,
@@ -29,30 +35,41 @@ const documentosSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         required: true,
         ref: 'usuario'
+    },
+    criadoEm: {
+        type: Date,
+        required: true,
+        default: Date.now
     }
 })
 
 //Decodificar as imagens
 //RG
-documentosSchema.virtual('rgImagemPath').get(function(){
-    if(this.rgImagem != null && this.rgImagemTipo != null){
-        return `data: ${this.rgImagemTipo};charset=utf-8;base64,${this.rgImagem.toString('base64')}`
+documentosSchema.virtual('rgFrenteImagemPath').get(function(){
+    if(this.rgFrenteImagem != null && this.rgFrenteImagemTipo != null){
+        return `data: ${this.rgFrenteImagemTipo};charset=utf-8;base64,${this.rgFrenteImagem.toString('base64')}`
+    }
+})
+
+documentosSchema.virtual('rgCostaImagemPath').get(function(){
+    if(this.rgCostaImagem != null && this.rgCostaImagemTipo != null){
+        return `data: ${this.rgCostaImagemTipo};charset=utf-8;base64,${this.rgCostaImagem.toString('base64')}`
     }
 })
 
 //CPF
 documentosSchema.virtual('cpfImagemPath').get(function(){
-    if(this.cpfImagem != null && this.cpfmagemTipo != null){
-        return `data: ${this.cpfmagemTipo};charset=utf-8;base64,${this.cpfImagem.toString('base64')}`
+    if(this.cpfImagem != null && this.cpfImagemTipo != null){
+        return `data: ${this.cpfImagemTipo};charset=utf-8;base64,${this.cpfImagem.toString('base64')}`
     }
 })
 
 //Comprovante de residência
-documentosSchema.virtual('compResPath').get(function(){
+documentosSchema.virtual('compResImagemPath').get(function(){
     if(this.compResImagem != null && this.compResImagemTipo != null){
         return `data: ${this.compResImagemTipo};charset=utf-8;base64,${this.compResImagem.toString('base64')}`
     }
 })
 
 
-module.exports = mongoose.Schema('documentos', documentosSchema)
+module.exports = mongoose.model('documentos', documentosSchema)

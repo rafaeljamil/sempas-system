@@ -9,7 +9,18 @@ const relatorioSocialSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         required: true,
         ref: 'usuario'
+    },
+    criadoEm:{
+        type: Date,
+        required: true,
+        default: Date.now
+    },
+    criadoPor: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'operador',
+        default: 'Operador'
     }
 })
 
-module.exports = mongoose.Schema('relatorioSocial', relatorioSocialSchema)
+module.exports = mongoose.model('relatorioSocial', relatorioSocialSchema)
