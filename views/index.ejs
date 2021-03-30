@@ -1,0 +1,7 @@
+
+<h2>Cadastros recentes</h2>
+<% cadastros.forEach(cadastro => { %>
+    <div>
+        <a href="cadastros/<%=cadastro.id%>"><%=cadastro.nome.nomeCompleto%></a>
+    </div>
+<% }) %>

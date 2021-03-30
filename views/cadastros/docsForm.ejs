@@ -1,0 +1,21 @@
+<h2>Adicionar documentos para <%=cad.nome.nomeCompleto%>.</h2>
+<p>Os documentos devem ser enviados em formato de imagem (jpg, jpeg, png, gif).</p>
+<form action="/cadastros/<%=cad.id%>/docs" method="post">
+    <div>
+        <label for="rgFrente">Frente do RG: </label>
+        <input class="filepond" type="file" name="rgFrente">
+    </div>
+    <div>
+        <label for="rgCosta">Costas do RG: </label>
+        <input class="filepond" type="file" name="rgCosta">       
+    </div>
+    <div>
+        <label for="cpfFrente">Frente do CPF: </label>
+        <input class="filepond" type="file" name="cpfFrente">
+    </div>
+    <div>
+        <label for="compRes">Comprovante de residência: </label>
+        <input class="filepond" type="file" name="compRes">
+    </div>
+    <button type="submit">Salvar</button>
+</form>
