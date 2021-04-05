@@ -1,4 +1,6 @@
 <h2>Cadastros recentes</h2>
 <% cadastros.forEach(cadastro => { %>
-    <a href="cadastros/<%=cadastro.id%>"><%=cadastro.nome.nomeCompleto%></a>
+    <div>
+        <a href="cadastros/<%=cadastro.id%>"><%=cadastro.nome.nomeCompleto%></a>
+    </div>
 <% }) %>

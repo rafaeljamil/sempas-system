@@ -34,8 +34,8 @@ FilePond.registerPlugin(
 
 FilePond.setOptions({
     // stylePanelAspectRatio: 1 / coverAspectRatio,
-    imageResizeTargetWidth: coverWidth,
-    imageResizeTargetHeight: coverHeight  
+    imageResizeTargetWidth: 100,
+    imageResizeTargetHeight: 150  
 });
 
 FilePond.parse(document.body);

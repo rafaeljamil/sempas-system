@@ -29,14 +29,15 @@
 </div>
 <div>
     <h2>Documentos</h2>
-    <% docs.forEach(doc => { %>
-        <img src="<%=doc.rgFrenteImagemPath%>">
-        <img src="<%=doc.rgCostaImagemPath%>">
-        <img src="<%=doc.cpfImagemPath%>">
-        <img src="<%=doc.compResImagemPath%>">
-    <%})%>
+        <img width="200" height="250" src="<%=docs.rgFrenteImagemPath%>">
+        <img width="200" height="250" src="<%=docs.rgCostaImagemPath%>">
+        <img width="200" height="250" src="<%=docs.cpfImagemPath%>">
+        <img width="200" height="250" src="<%=docs.compResImagemPath%>">
+        <% console.log(docs) %>
+        <% console.log(docs.rgFrenteImagemPath) %>
 </div>
 <div>
     <a href="/cadastros/<%=cad.id%>/docs">Documentos</a>
     <a href="/cadastros/<%=cad.id%>/editar">Editar</a>
+    <%-include('deleteForm.ejs')%>
 </div>

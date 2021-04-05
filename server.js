@@ -9,6 +9,7 @@ const ejs = require('ejs')
 const ejsLayouts = require('express-ejs-layouts')
 const indexRoute = require('./routes/index')
 const cadRoute = require('./routes/cadastros')
+const methodOverride = require('method-override')
 
 mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser:true, useUnifiedTopology: true })
 const db = mongoose.connection
@@ -20,7 +21,8 @@ app.set('views', __dirname + '/views')
 app.set('layout', 'layouts/layout')
 app.use(ejsLayouts)
 app.use('/public', express.static(__dirname + "/public"))
-app.use(express.urlencoded({extended:false}))
+app.use(express.urlencoded({extended:false, limit:'5mb'}))
+app.use(methodOverride('_method'))
 
 app.use('/', indexRoute)
 app.use('/cadastros', cadRoute)
