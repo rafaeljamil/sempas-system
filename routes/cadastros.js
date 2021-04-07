@@ -18,7 +18,30 @@ const upload = multer({
 })
 
 router.get('/', (req,res) => {
-    res.render("cadastros/index")
+    res.render('cadastros', {cad:false})
+})
+
+router.get('/busca', async (req,res) => {
+    //Antes era definido um objeto em Busca contendo o campo nome com valor igual ao RegExp
+    //Não conseguia dar query no Banco de Dados usando find pra achar pelo nome, talvez porque
+    //nome é um documento no BD, então encontrei na documentação do MongoDB que posso fazer busca
+    //em campos internos usando ponto se colocar entre aspas e PAM, funcionou!
+    let busca
+    if (req.query.buscaNome != null && req.query.buscaNome != ''){
+        busca = new RegExp(req.query.buscaNome, 'i')
+    }
+    try{
+        const cad = await Cadastro.find({"nome.nomeCompleto": busca})
+        //res.send("Buscou por:" + cad)
+        console.log(cad)
+        res.render('cadastros/index', {cad:cad})
+    }catch(err){
+        if (busca == null || busca == ''){
+            res.redirect('/cadastros', {cad:cad})
+        }
+        console.log(err)
+        res.redirect('/')
+    }
 })
 
 router.get('/novo', (req,res) => {
@@ -65,6 +88,15 @@ router.post('/novo', async (req,res) => {
     }
 })
 
+// router.post('/busca', async (req,res) => {
+//     let cad
+//     try{
+//         cad = await Cadastro.find({nomeCompleto, apelido, cpf: req.query.busca}).populate('usuario').exec()
+//         res.render('index', {cad:cad})
+//     }catch{
+//         res.redirect('/')
+//     }
+// })
 
 router.get('/:id', async (req,res) => {
     try{
@@ -94,10 +126,12 @@ router.post('/:id/docs', upload.any(), async (req,res) => {
     })
     const files = req.files
     //console.log(files)
+    let filename
+    let fieldname
     try{
         for (file in files){
-            let filename = files[file].filename
-            let fieldname = files[file].fieldname
+            filename = files[file].filename
+            fieldname = files[file].fieldname
             console.log(filename)
             console.log(fieldname)
             switch(fieldname){
@@ -119,27 +153,16 @@ router.post('/:id/docs', upload.any(), async (req,res) => {
         res.redirect('/cadastros/'+req.params.id)
     }catch{
         if(files != null){
-            fs.unlink(path.join(uploadPath, filename), err => {
-                if(err) console.err(err)
-            })
+            for (file in files){
+                filename = files[file].filename
+                fs.unlink(path.join(uploadPath, filename), err => {
+                    if(err) console.err(err)
+                })
+            }
+            
         }
         res.redirect('/')
     }
-    // let docs = new Docs({
-    //     usuarioId: req.params.id,
-    // })
-    // try{
-    //     saveDocs(docs, req.body.rgFrente, 'rgFrente')
-    //     saveDocs(docs, req.body.rgCosta, 'rgCosta')
-    //     saveDocs(docs, req.body.cpfFrente, 'cpf')
-    //     saveDocs(docs, req.body.compRes, 'compRes')
-    //     const newDocs = await docs.save()
-    //     //console.log(JSON.parse(req.body.rgFrente))
-    //     res.redirect('/cadastros/'+req.params.id)
-    // }catch(err){
-    //     console.log(err)
-    //     res.redirect('/')
-    // }
 })
 
 router.get('/:id/editar', async (req,res) => {
@@ -154,7 +177,44 @@ router.get('/:id/editar', async (req,res) => {
 })
 
 router.put('/:id', async (req,res) => {
-
+    let cad
+    try{
+        cad = await Cadastro.findById(req.params.id)
+        cad.nome={
+            nomeCompleto: req.body.nome, 
+            apelido: req.body.apelido
+        }
+        cad.nomeMae = req.body.nomeMae,
+        cad.nis = req.body.nis,
+        cad.cpf = req.body.cpf,
+        cad.rg = {
+            numero: req.body.rg,
+            orgaoExpedidor: req.body.orgao,
+            uf: req.body.uf,
+            dataEmissao: req.body.dataEmissao
+        }
+        cad.endereco = {
+            logradouro: req.body.endereco,
+            numero: req.body.numero,
+            complemento: req.body.complemento,
+            cep: req.body.cep,
+            bairro: req.body.bairro,
+            cidade: req.body.cidade,
+            estado: req.body.estado
+        }
+        cad.contatos = {
+            fixo: req.body.telFixo,
+            celular: req.body.cel,
+            email: req.body.email
+        }
+        await cad.save()
+        res.redirect(`/cadastros/${req.params.id}`)
+    }catch{
+        if (cad == null){
+            res.redirect('/')
+        }
+        res.render('cadastros/editar', { cad:cad, errorMessage: "Erro ao editar cadastro." })
+    }
 })
 
 router.delete('/:id', async (req,res) => {
@@ -179,29 +239,5 @@ router.delete('/:id', async (req,res) => {
 })
 
 
-async function saveDocs(docs, docImg, docEntry){
-    if(docImg == null) return
-    const imgs = JSON.parse(docImg)
-    if(imgs != null && imageMimeTypes.includes(imgs.type)){
-        switch(docEntry){
-            case 'rgFrente':
-                docs.rgFrenteImagem = new Buffer.from(imgs.data, 'base64')
-                docs.rgFrenteImagemTipo = imgs.type
-                break;
-            case 'rgCosta':
-                docs.rgCostaImagem = new Buffer.from(imgs.data, 'base64')
-                docs.rgCostaImagemTipo = imgs.type
-                break;
-            case 'cpf':
-                docs.cpfImagem = new Buffer.from(imgs.data, 'base64')
-                docs.cpfImagemTipo = imgs.type
-                break;
-            case 'compRes':
-                docs.compResImagem = new Buffer.from(imgs.data, 'base64')
-                docs.compResImagemTipo = imgs.type
-                break;
-        }
-    }
-}
 
 module.exports = router

@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const Docs = require('./documentos')
 
 const usuarioSchema = mongoose.Schema({
     nome: { 
@@ -53,6 +54,18 @@ const usuarioSchema = mongoose.Schema({
     //     ref: 'Operador',
     //     default: 'Default'
     // }
+})
+
+usuarioSchema.pre('remove', function(next){
+    Docs.find({usuarioId: this.id}, (err, docs) => {
+        if (err){
+            next(err)
+        } else if (docs.lenght > 0){
+            next(new Error('Este cadastro contém documentos no banco de dados.'))
+        } else {
+            next()
+        }
+    })
 })
 
 module.exports = mongoose.model('Usuario', usuarioSchema)

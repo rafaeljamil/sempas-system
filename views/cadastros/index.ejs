@@ -5,10 +5,16 @@
     <a href="cadastros/novo">Novo</a>
 </div>
 <div>
-    <form action="cadastros/busca" method="post">
+    <form action="/cadastros/busca" method="get">
         <div>
-            <input type="text" name="busca" placeholder="Busca por nome, apelido ou número do documento">
-            <button type="submit">Buscar</button>
+            <input type="text" name="buscaNome" placeholder="Busca por nome">
+            <input type="submit" value="Buscar">
         </div>
     </form>
+</div>
+<br>
+<div>
+    <% if (cad) { %>
+        <%- include('../partials/tabelaCadastros.ejs') %>
+    <% } %>
 </div>

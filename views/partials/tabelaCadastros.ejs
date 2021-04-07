@@ -1,0 +1,12 @@
+<table>
+    <tr>
+        <th>Nome</th>
+        <th>CPF</th>
+    </tr>
+    <% cad.forEach(c => { %>
+        <tr>
+            <td><a href="cadastros/<%=c.id%>"><%=c.nome.nomeCompleto%></a></td>
+            <td><%=c.cpf%></td>
+        </tr>
+    <% }) %>
+</table>

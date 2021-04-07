@@ -1,0 +1,9 @@
+<h2 class="page-header">Editar Cadastro</h2>
+<form action="/cadastros/<%=cad.id%>?_method=PUT" method="POST">
+<!-- Em vez de criar os campos pra preencher aqui, criou-se uma view parcial pra reaproveitar os campos na view edit -->
+    <%- include('usuarioForm') %>
+    <div class="form-row form-row-end btn-row">
+        <a class="btn btn-danger" href="/cadastros">Cancelar</a>
+        <!-- <button class="btn btn-primary" type="submit">Criar</button> -->
+    </div>
+</form>

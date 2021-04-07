@@ -1,8 +1,9 @@
 <h2>Adicionar documentos para <%=cad.nome.nomeCompleto%>.</h2>
 <p>Os documentos devem ser enviados em formato de imagem (jpg, jpeg, png, gif).</p>
+<p><label style="color:red;">*</label><label> - Campos Obrigatórios</label></p>
 <form action="/cadastros/<%=cad.id%>/docs" method="post" enctype="multipart/form-data">
     <div>
-        <label for="rgFrente">Frente do RG: </label>
+        <label for="rgFrente">Frente do RG <label style="color:red;">*</label>: </label>
         <input type="file" name="rgFrente">
     </div>
     <div>
@@ -10,11 +11,11 @@
         <input type="file" name="rgCosta">       
     </div>
     <div>
-        <label for="cpfFrente">Frente do CPF: </label>
+        <label for="cpfFrente">Frente do CPF <label style="color:red;">*</label>: </label>
         <input type="file" name="cpfFrente">
     </div>
     <div>
-        <label for="compRes">Comprovante de residência: </label>
+        <label for="compRes">Comprovante de residência <label style="color:red;">*</label>: </label>
         <input type="file" name="compRes">
     </div>
     <button type="submit">Salvar</button>

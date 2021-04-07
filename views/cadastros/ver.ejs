@@ -29,12 +29,12 @@
 </div>
 <div>
     <h2>Documentos</h2>
-        <img width="200" height="250" src="<%=docs.rgFrenteImagemPath%>">
-        <img width="200" height="250" src="<%=docs.rgCostaImagemPath%>">
-        <img width="200" height="250" src="<%=docs.cpfImagemPath%>">
-        <img width="200" height="250" src="<%=docs.compResImagemPath%>">
-        <% console.log(docs) %>
-        <% console.log(docs.rgFrenteImagemPath) %>
+    <% if(docs != null && docs != '') { %>
+        <a href="<%=docs.rgFrenteImagemPath%>"><img width="200" height="250" src="<%=docs.rgFrenteImagemPath%>"></a>
+        <a href="<%=docs.rgCostaImagemPath%>"><img width="200" height="250" src="<%=docs.rgCostaImagemPath%>"></a>
+        <a href="<%=docs.cpfImagemPath%>"><img width="200" height="250" src="<%=docs.cpfImagemPath%>"></a>
+        <a href="<%=docs.compResImagemPath%>"><img width="200" height="250" src="<%=docs.compResImagemPath%>"></a>    
+    <% } %>
 </div>
 <div>
     <a href="/cadastros/<%=cad.id%>/docs">Documentos</a>
