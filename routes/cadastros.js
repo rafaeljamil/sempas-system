@@ -1,21 +1,28 @@
 const express = require('express')
+const app = express()
 const router = express.Router()
 const Cadastro = require('../models/usuario')
 const Docs = require('../models/documentos')
 const imageMimeTypes = ['image/jpeg', 'image/png', 'image/gif']
 const path = require('path')
 const fs = require('fs')
-const uploadPath = path.join('public', Docs.caminhoBaseDocs)
+
+//Multer setup
 const multer = require('multer')
+let date =  Date.now()
+const filename = function (req, file, cb) {cb( null, date + '-' + file.fieldname + '.jpeg')}
+const uploadPath = path.join( './public/', Docs.caminhoBaseDocs)
+const destination = function (req, file, cb) {cb(null, uploadPath)}
+const fileFilter = function (req, file, cb) {cb(null, imageMimeTypes.includes(file.mimetype))}
+const storage = multer.diskStorage({filename, destination})
+// const upload = multer({storage, fileFilter})
+
 const upload = multer({
-    dest: uploadPath,
-    fileFilter : (req, file, cb) => {
-        cb(null, imageMimeTypes.includes(file.mimetype))
-    },
-    filename: (req, file, cb) => {
-        cb(null, file.fieldname + '-' + Date.now())
-    } 
+    storage: storage,
+    fileFilter : fileFilter,
 })
+
+//console.log(upload)
 
 router.get('/', (req,res) => {
     res.render('cadastros', {cad:false})
@@ -33,7 +40,7 @@ router.get('/busca', async (req,res) => {
     try{
         const cad = await Cadastro.find({"nome.nomeCompleto": busca})
         //res.send("Buscou por:" + cad)
-        console.log(cad)
+        //console.log(cad)
         res.render('cadastros/index', {cad:cad})
     }catch(err){
         if (busca == null || busca == ''){
@@ -80,23 +87,13 @@ router.post('/novo', async (req,res) => {
     })
     try{
         let novoCadastro = await cadastro.save()
-        console.log("Cadastro realizado com sucesso.")
+        console.log("Cadastro de "+ cadastro.nome.nomeCompleto +" realizado com sucesso.")
         res.redirect(`/cadastros/${novoCadastro.id}`)
     }catch(err){
         console.log(err)
         res.redirect('/cadastros/novo')
     }
 })
-
-// router.post('/busca', async (req,res) => {
-//     let cad
-//     try{
-//         cad = await Cadastro.find({nomeCompleto, apelido, cpf: req.query.busca}).populate('usuario').exec()
-//         res.render('index', {cad:cad})
-//     }catch{
-//         res.redirect('/')
-//     }
-// })
 
 router.get('/:id', async (req,res) => {
     try{
@@ -132,8 +129,8 @@ router.post('/:id/docs', upload.any(), async (req,res) => {
         for (file in files){
             filename = files[file].filename
             fieldname = files[file].fieldname
-            console.log(filename)
-            console.log(fieldname)
+            //console.log(filename)
+            //console.log(fieldname)
             switch(fieldname){
                 case 'rgFrente':
                     docs.rgFrenteImagem = filename;
@@ -150,6 +147,7 @@ router.post('/:id/docs', upload.any(), async (req,res) => {
             }
         }
         const newDocs = docs.save()
+        console.log('Documentos anexados com sucesso.')
         res.redirect('/cadastros/'+req.params.id)
     }catch{
         if(files != null){
@@ -208,6 +206,7 @@ router.put('/:id', async (req,res) => {
             email: req.body.email
         }
         await cad.save()
+        console.log("Cadastro de "+ cad.nome.nomeCompleto +" editado com sucesso.")
         res.redirect(`/cadastros/${req.params.id}`)
     }catch{
         if (cad == null){
@@ -217,7 +216,7 @@ router.put('/:id', async (req,res) => {
     }
 })
 
-router.delete('/:id', async (req,res) => {
+router.delete('/:id/deletar', async (req,res) => {
     let cadas
     let docs
     try{
@@ -226,9 +225,36 @@ router.delete('/:id', async (req,res) => {
         if(cadas && docs == null){
             await cadas.remove()
         }else if(cadas && docs){
+            fs.unlink(docs.rgFrenteImagemPath, (err => {
+                if (err) console.log(err);
+                else{
+                    console.log(docs.rgFrenteImagemPath + " deletado com sucesso.")
+                }
+             }))
+            fs.unlink(docs.cpfImagemPath, (err => {
+                if (err) console.log(err);
+                else{
+                    console.log(docs.cpfImagemPath + " deletado com sucesso.")
+                }
+             }))
+             fs.unlink(docs.compResImagemPath, (err => {
+                if (err) console.log(err);
+                else{
+                    console.log(docs.compResImagemPath + " deletado com sucesso.")
+                }
+             }))
+             if(docs.rgCostaImagem != null && docs.rgCostaImagem != ''){
+                fs.unlink( docs.rgCostaImagemPath, (err => {
+                    if (err) console.log(err);
+                    else{
+                        console.log(docs.rgCostaImagemPath + " deletado com sucesso.")
+                    }
+                 }))
+             }
             await cadas.remove()
             await docs.remove()
         }
+
         // console.log(cadas.id)
         // console.log(docs.id)
         res.redirect('/cadastros')
@@ -237,7 +263,5 @@ router.delete('/:id', async (req,res) => {
         res.redirect(`/cadastros/${req.params.id}`)
     }
 })
-
-
 
 module.exports = router

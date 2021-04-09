@@ -10,6 +10,7 @@ const ejsLayouts = require('express-ejs-layouts')
 const indexRoute = require('./routes/index')
 const cadRoute = require('./routes/cadastros')
 const methodOverride = require('method-override')
+const multer = require('multer')
 
 mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser:true, useUnifiedTopology: true })
 const db = mongoose.connection

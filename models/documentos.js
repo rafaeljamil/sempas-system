@@ -35,27 +35,27 @@ const documentosSchema = mongoose.Schema({
 //RG
 documentosSchema.virtual('rgFrenteImagemPath').get(function(){
     if(this.rgFrenteImagem != null){
-        return path.join('/public/', caminhoBaseDocs, this.rgFrenteImagem)
+        return path.join('./public/', caminhoBaseDocs, this.rgFrenteImagem)
     }
 })
 
 documentosSchema.virtual('rgCostaImagemPath').get(function(){
     if(this.rgCostaImagem != null){
-        return path.join('/public/', caminhoBaseDocs, this.rgCostaImagem)
+        return path.join('public/', caminhoBaseDocs, this.rgCostaImagem)
     }
 })
 
 //CPF
 documentosSchema.virtual('cpfImagemPath').get(function(){
     if(this.cpfImagem != null){
-        return path.join('/public/', caminhoBaseDocs, this.cpfImagem)
+        return path.join('public/', caminhoBaseDocs, this.cpfImagem)
     }
 })
 
 //Comprovante de residência
 documentosSchema.virtual('compResImagemPath').get(function(){
     if(this.compResImagem != null){
-        return path.join('/public/', caminhoBaseDocs, this.compResImagem)
+        return path.join('public/', caminhoBaseDocs, this.compResImagem)
     }
 })
 

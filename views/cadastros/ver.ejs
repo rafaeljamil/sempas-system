@@ -25,15 +25,17 @@
     <% if(cad.contatos.email != null && cad.contatos.email !== '') { %>
         <div>E-mail: <%=cad.contatos.email%></div>
     <% } %>
-    <div>Cadastrado por <%=cad.criadoPor%> em <%=cad.criadoEm.toDateString()%>.</div>
+    <div>Cadastrado por <%=cad.criadoPor%> em <%=cad.criadoEm.getDate()%>/<%=cad.criadoEm.getMonth()%>/<%=cad.criadoEm.getFullYear()%>.</div>
 </div>
 <div>
     <h2>Documentos</h2>
     <% if(docs != null && docs != '') { %>
-        <a href="<%=docs.rgFrenteImagemPath%>"><img width="200" height="250" src="<%=docs.rgFrenteImagemPath%>"></a>
-        <a href="<%=docs.rgCostaImagemPath%>"><img width="200" height="250" src="<%=docs.rgCostaImagemPath%>"></a>
-        <a href="<%=docs.cpfImagemPath%>"><img width="200" height="250" src="<%=docs.cpfImagemPath%>"></a>
-        <a href="<%=docs.compResImagemPath%>"><img width="200" height="250" src="<%=docs.compResImagemPath%>"></a>    
+        <a href="<%=docs.rgFrenteImagemPath%>"><img height="250" src="../<%=docs.rgFrenteImagemPath%>"></a>
+        <% if(docs.rgCostaImagemPath != null && docs.rgCostaImagemPath != ''){%>
+            <a href="<%=docs.rgCostaImagemPath%>"><img height="250" src="../<%=docs.rgCostaImagemPath%>"></a>
+        <% } %>
+        <a href="<%=docs.cpfImagemPath%>"><img height="250" src="../<%=docs.cpfImagemPath%>"></a>
+        <a href="<%=docs.compResImagemPath%>"><img height="250" src="../<%=docs.compResImagemPath%>"></a>    
     <% } %>
 </div>
 <div>

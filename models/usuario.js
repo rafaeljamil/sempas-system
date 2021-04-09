@@ -56,16 +56,16 @@ const usuarioSchema = mongoose.Schema({
     // }
 })
 
-usuarioSchema.pre('remove', function(next){
-    Docs.find({usuarioId: this.id}, (err, docs) => {
-        if (err){
-            next(err)
-        } else if (docs.lenght > 0){
-            next(new Error('Este cadastro contém documentos no banco de dados.'))
-        } else {
-            next()
-        }
-    })
-})
+// usuarioSchema.pre('remove', function(next){
+//     Docs.find({usuarioId: this.id}, (err, docs) => {
+//         if (err){
+//             next(err)
+//         } else if (docs.lenght > 0){
+//             next(new Error('Este cadastro contém documentos no banco de dados.'))
+//         } else {
+//             next()
+//         }
+//     })
+// })
 
 module.exports = mongoose.model('Usuario', usuarioSchema)
