@@ -5,27 +5,41 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Toda f*cking vez que tento importar stylesheets de cdn não funciona se não tiver media="screen" -->
-
+    <link rel="stylesheet" href="/public/styles/bootstrap.min.css" media="screen">
+    <script defer src="/public/javascripts/bootstrap.min.js"></script>
     <title>SEMPAS</title>
 </head>
 <body>
-    <div>
-        <img style="height: 20vh; width:auto;" src="/public/images/logo-sempas-trim.jpeg" alt="Logo-sempas">
+    <div class="container-fluid">
+        <div class="d-flex flex-wrap row align-items-center justify-content-center">
+            <div class="col-sm">
+                <img style="height:20vh; width:auto;" src="/public/images/logo-sempas-trim.jpeg" alt="Logo-sempas">
+            </div>
+            <div class="col-lg-auto">
+                <h1>Sistema de Cadastro de Usuários</h1>
+            </div>
+            <div class="col-sm">
+                <nav class="row justify-content-center ">
+                    <ul style="list-style-type: none;" class="col-sm-auto list-group">
+                        <li><a class="row list-group-item text-reset text-decoration-none" href="/">Home</a></li>
+                        <li><a class="row list-group-item text-reset text-decoration-none" href="/cadastros">Cadastros</a></li>
+                    </ul>
+                </nav>
+            </div>  
+        </div>
     </div>
-    <div>
-        <nav>
-            <ul>
-                <li><a href="/">Home</a></li>
-            </ul>
-            <ul>
-                <li><a href="/cadastros">Cadastros</a></li>
-            </ul>
-        </nav>
+    <hr>
+    <div class="container-fluid">
+        <div class="my-4 row justify-content-center">
+            <div class="col-lg-auto">
+                <%-body%>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-auto">
+                <%- include('../partials/footer')%>
+            </div>
+        </div>
     </div>
-    
-    <h1>Sistema de Cadastro de Usuários</h1>
-    <%- body %> 
-    <!-- <%- include('../partials/footer')%> -->
-
 </body>
 </html>

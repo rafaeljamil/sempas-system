@@ -2,8 +2,12 @@
 <form action="/cadastros/<%=cad.id%>?_method=PUT" method="POST">
 <!-- Em vez de criar os campos pra preencher aqui, criou-se uma view parcial pra reaproveitar os campos na view edit -->
     <%- include('usuarioForm') %>
-    <div class="form-row form-row-end btn-row">
-        <a class="btn btn-danger" href="/cadastros">Cancelar</a>
-        <!-- <button class="btn btn-primary" type="submit">Criar</button> -->
+    <div class="container-fluid justify-content-end">
+        <div class="col my-4">
+            <button class="btn btn-primary" type="submit">Atualizar</button>
+            <a class="btn btn-danger" href="/cadastros/<%=cad.id%>">Cancelar</a>
+            <!-- <button class="btn btn-primary" type="submit">Criar</button> -->
+        </div>
     </div>
+  
 </form>

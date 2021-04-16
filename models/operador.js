@@ -21,6 +21,11 @@ const operadorSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    nivel:{
+        master: Boolean,
+        admin: Boolean,
+        padrao: Boolean
+    },
     criadoEm:{
         type: Date,
         required: true,

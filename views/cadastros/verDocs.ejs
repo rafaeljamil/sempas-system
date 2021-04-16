@@ -1,0 +1,19 @@
+<div style="border: 1px solid gray" class="container my-2">
+    <div>
+        <h2>Documentos</h2>
+        <% if(docs != null && docs != '') { %>
+            <a href="<%=docs.rgFrenteImagemPath%>"><img height="250" src="../<%=docs.rgFrenteImagemPath%>"></a>
+            <% if(docs.rgCostaImagemPath != null && docs.rgCostaImagemPath != ''){%>
+                <a href="<%=docs.rgCostaImagemPath%>"><img height="250" src="../<%=docs.rgCostaImagemPath%>"></a>
+            <% } %>
+            <a href="<%=docs.cpfImagemPath%>"><img height="250" src="../<%=docs.cpfImagemPath%>"></a>
+            <a href="<%=docs.compResImagemPath%>"><img height="250" src="../<%=docs.compResImagemPath%>"></a>    
+        <% } %>
+    </div>
+    
+   <div class="row">
+        <a class="col-sm-auto btn btn-primary my-2" href="/cadastros/<%=cad.id%>/docs">Adicionar Documentos</a>
+        <div class="col"><%-include('deleteForm.ejs', {scope:"Documentos"})%></div>
+   </div>
+    
+</div>

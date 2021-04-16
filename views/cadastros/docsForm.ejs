@@ -1,22 +1,25 @@
-<h2>Adicionar documentos para <%=cad.nome.nomeCompleto%>.</h2>
-<p>Os documentos devem ser enviados em formato de imagem (jpg, jpeg, png, gif).</p>
-<p><label style="color:red;">*</label><label> - Campos Obrigatórios</label></p>
-<form action="/cadastros/<%=cad.id%>/docs" method="post" enctype="multipart/form-data">
-    <div>
-        <label for="rgFrente">Frente do RG <label style="color:red;">*</label>: </label>
-        <input type="file" name="rgFrente">
-    </div>
-    <div>
-        <label for="rgCosta">Costas do RG: </label>
-        <input type="file" name="rgCosta">       
-    </div>
-    <div>
-        <label for="cpfFrente">Frente do CPF <label style="color:red;">*</label>: </label>
-        <input type="file" name="cpfFrente">
-    </div>
-    <div>
-        <label for="compRes">Comprovante de residência <label style="color:red;">*</label>: </label>
-        <input type="file" name="compRes">
-    </div>
-    <button type="submit">Salvar</button>
-</form>
+<div class="container d-flex flex-column">
+    <h2>Adicionar documentos para <%=cad.nome.nomeCompleto%>.</h2>
+    <p>Os documentos devem ser enviados em formato de imagem (jpg, jpeg, png, gif).</p>
+    <p><label style="color:red;">*</label><label> - Campos Obrigatórios</label></p>
+    <form action="/cadastros/<%=cad.id%>/docs" method="post" enctype="multipart/form-data">
+        <div class="d-flex flex-column my-2">
+            <label for="rgFrente">Frente do RG <label style="color:red;">*</label>: </label>
+            <input class="form-control" type="file" name="rgFrente">
+        </div>
+        <div class="d-flex flex-column my-2">
+            <label for="rgCosta">Costas do RG: </label>
+            <input class="form-control" type="file" name="rgCosta">      
+        </div>
+        <div class="d-flex flex-column my-2">
+            <label for="cpfFrente">Frente do CPF <label style="color:red;">*</label>: </label>
+            <input class="form-control" type="file" name="cpfFrente">
+        </div>
+        <div class="d-flex flex-column my-2">
+            <label for="compRes">Comprovante de residência <label style="color:red;">*</label>: </label>
+            <input class="form-control" type="file" name="compRes">
+        </div>
+        <button class="btn btn-primary my-2" type="submit">Salvar</button>
+        <a class="btn btn-danger" href="/cadastros/<%=cad.id%>">Cancelar</a>
+    </form>
+</div>

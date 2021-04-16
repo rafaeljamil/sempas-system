@@ -1,4 +1,3 @@
-const { Router } = require('express')
 const express = require('express')
 const Cadastros = require('../models/usuario')
 const router = express.Router()

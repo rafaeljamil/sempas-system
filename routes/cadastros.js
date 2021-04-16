@@ -1,26 +1,13 @@
 const express = require('express')
-const app = express()
 const router = express.Router()
 const Cadastro = require('../models/usuario')
 const Docs = require('../models/documentos')
-const imageMimeTypes = ['image/jpeg', 'image/png', 'image/gif']
-const path = require('path')
+const docsRoute = require('../routes/documentos')
 const fs = require('fs')
 
-//Multer setup
-const multer = require('multer')
-let date =  Date.now()
-const filename = function (req, file, cb) {cb( null, date + '-' + file.fieldname + '.jpeg')}
-const uploadPath = path.join( './public/', Docs.caminhoBaseDocs)
-const destination = function (req, file, cb) {cb(null, uploadPath)}
-const fileFilter = function (req, file, cb) {cb(null, imageMimeTypes.includes(file.mimetype))}
-const storage = multer.diskStorage({filename, destination})
-// const upload = multer({storage, fileFilter})
+//A rota de cadastros estava ficando grande demais, então separei a rota /docs 
+router.use('/:id/docs', docsRoute) 
 
-const upload = multer({
-    storage: storage,
-    fileFilter : fileFilter,
-})
 
 //console.log(upload)
 
@@ -52,7 +39,7 @@ router.get('/busca', async (req,res) => {
 })
 
 router.get('/novo', (req,res) => {
-    res.render('cadastros/novo')
+    res.render('cadastros/novo', {cad: new Cadastro()})
 })
 
 router.post('/novo', async (req,res) => {
@@ -102,63 +89,8 @@ router.get('/:id', async (req,res) => {
         let docs = await Docs.findOne({usuarioId: req.params.id}).populate('documentos').exec()
         //console.log(docs)
         //console.log(docs.rgFrenteImagem)
-        res.render('cadastros/ver', {cad:cad, docs:docs})
+        res.render('cadastros/ver', {cad:cad, docs:docs, scope:""})
     }catch{
-        res.redirect('/')
-    }
-})
-
-router.get('/:id/docs', async (req,res) => {
-    try{
-        const cad = await Cadastro.findById(req.params.id).populate('usuario').exec()
-        res.render('cadastros/docsForm', {cad:cad})
-    }catch{
-        res.redirect('/'+req.params.id)
-    }
-})
-
-router.post('/:id/docs', upload.any(), async (req,res) => {
-    let docs = new Docs({
-        usuarioId : req.params.id,
-    })
-    const files = req.files
-    //console.log(files)
-    let filename
-    let fieldname
-    try{
-        for (file in files){
-            filename = files[file].filename
-            fieldname = files[file].fieldname
-            //console.log(filename)
-            //console.log(fieldname)
-            switch(fieldname){
-                case 'rgFrente':
-                    docs.rgFrenteImagem = filename;
-                    break;
-                case 'rgCosta':
-                    docs.rgCostaImagem = filename;
-                    break;
-                case 'cpfFrente':
-                    docs.cpfImagem = filename;
-                    break;
-                case 'compRes':
-                    docs.compResImagem = filename;
-                    break;
-            }
-        }
-        const newDocs = docs.save()
-        console.log('Documentos anexados com sucesso.')
-        res.redirect('/cadastros/'+req.params.id)
-    }catch{
-        if(files != null){
-            for (file in files){
-                filename = files[file].filename
-                fs.unlink(path.join(uploadPath, filename), err => {
-                    if(err) console.err(err)
-                })
-            }
-            
-        }
         res.redirect('/')
     }
 })
@@ -219,45 +151,56 @@ router.put('/:id', async (req,res) => {
 router.delete('/:id/deletar', async (req,res) => {
     let cadas
     let docs
+    let errors = []
     try{
         cadas = await Cadastro.findById(req.params.id).exec()
         docs = await Docs.findOne({usuarioId: req.params.id}).exec() //o find() tava retornando undefined
         if(cadas && docs == null){
-            await cadas.remove()
+            if(docs == null && docs == ''){
+                await cadas.remove()
+                res.redirect('/cadastros')
+            }
         }else if(cadas && docs){
-            fs.unlink(docs.rgFrenteImagemPath, (err => {
-                if (err) console.log(err);
-                else{
-                    console.log(docs.rgFrenteImagemPath + " deletado com sucesso.")
-                }
-             }))
-            fs.unlink(docs.cpfImagemPath, (err => {
-                if (err) console.log(err);
-                else{
-                    console.log(docs.cpfImagemPath + " deletado com sucesso.")
-                }
-             }))
-             fs.unlink(docs.compResImagemPath, (err => {
-                if (err) console.log(err);
-                else{
-                    console.log(docs.compResImagemPath + " deletado com sucesso.")
-                }
-             }))
-             if(docs.rgCostaImagem != null && docs.rgCostaImagem != ''){
-                fs.unlink( docs.rgCostaImagemPath, (err => {
-                    if (err) console.log(err);
-                    else{
-                        console.log(docs.rgCostaImagemPath + " deletado com sucesso.")
-                    }
-                 }))
-             }
-            await cadas.remove()
-            await docs.remove()
+            console.log("Não pode remover cadastro que contém documentos")
+            res.redirect(`/cadastros/${req.params.id}`)
+            // fs.unlink(docs.rgFrenteImagemPath, (err => {
+            //     if (err) errors.append(err);
+            //     else{
+            //         console.log(docs.rgFrenteImagemPath + " deletado com sucesso.")
+            //     }
+            //  }))
+            // fs.unlink(docs.cpfImagemPath, (err => {
+            //     if (err) errors.append(err);
+            //     else{
+            //         console.log(docs.cpfImagemPath + " deletado com sucesso.")
+            //     }
+            // }))
+            // fs.unlink(docs.compResImagemPath, (err => {
+            //     if (err) errors.append(err);
+            //     else{
+            //         console.log(docs.compResImagemPath + " deletado com sucesso.")
+            //     }
+            // }))
+            // if(docs.rgCostaImagem != null && docs.rgCostaImagem != ''){
+            //     fs.unlink( docs.rgCostaImagemPath, (err => {
+            //         if (err) errors.append(err);
+            //         else{
+            //             console.log(docs.rgCostaImagemPath + " deletado com sucesso.")
+            //         }
+            //     }))
+            // }
+            // if(errors.length > 0){
+            //     console.log(errors)
+            //     res.redirect(`/cadastros/${req.params.id}`)
+            // }else{
+            //     await cadas.remove()
+            //     await docs.remove()
+            // }
         }
 
         // console.log(cadas.id)
         // console.log(docs.id)
-        res.redirect('/cadastros')
+        
     }catch(err){
         console.log(err)
         res.redirect(`/cadastros/${req.params.id}`)

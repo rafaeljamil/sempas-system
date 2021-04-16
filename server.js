@@ -8,9 +8,12 @@ const mongoose = require('mongoose')
 const ejs = require('ejs')
 const ejsLayouts = require('express-ejs-layouts')
 const indexRoute = require('./routes/index')
+const loginRoute = require('./routes/login')
 const cadRoute = require('./routes/cadastros')
 const methodOverride = require('method-override')
-const multer = require('multer')
+
+const port = '3001'
+
 
 mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser:true, useUnifiedTopology: true })
 const db = mongoose.connection
@@ -26,8 +29,12 @@ app.use(express.urlencoded({extended:false, limit:'5mb'}))
 app.use(methodOverride('_method'))
 
 app.use('/', indexRoute)
+app.use('/login', loginRoute)
 app.use('/cadastros', cadRoute)
 
-app.listen('3001', (req,res) => {
-    console.log('Servidor iniciado. Porta: 3001')
+
+
+
+app.listen(port, (req,res) => {
+    console.log('Servidor iniciado. Porta: '+port)
 })
