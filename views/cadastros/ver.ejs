@@ -13,7 +13,7 @@
                 <div>Identidade:</div>
                 <div>Número: <%=cad.rg.numero%></div>
                 <div>Órgão expedidor: <%=cad.rg.orgaoExpedidor%></div>
-                <div>Data de emissão: <%=cad.rg.dataEmissao.toDateString()%></div>
+                <div>Data de emissão: <%=cad.rg.dataEmissao.getDate()%>/<%=cad.rg.dataEmissao.getMonth()%>/<%=cad.rg.dataEmissao.getFullYear()%></div>
             </div>
         </div>
         <div class="col">
@@ -40,8 +40,11 @@
     </div>
 </div>
 <div>
-    <%-include('verDocs')%>
+    <%-include('../partials/verDocs')%>
+</div>
+<div>
+    <%-include('../partials/tabelaVisitas')%>
 </div>
 <div>    
-    <%-include('deleteForm.ejs', {scope: "Cadastro"})%>
+    <%-include('../partials/deleteForm.ejs', {scope: "Cadastro"})%>
 </div>

@@ -8,6 +8,20 @@
     <link rel="stylesheet" href="/public/styles/bootstrap.min.css" media="screen">
     <script defer src="/public/javascripts/bootstrap.min.js"></script>
     <title>SEMPAS</title>
+    
+    <!-- Estilo feito só pra aumentar imagem do documento ao clicar -->
+    <style>
+        .pequeno{
+            cursor: pointer;
+            height:40vh; 
+            width:auto;
+        }
+        .grande{
+            cursor: pointer;
+            height: 90vh;
+            width: auto;
+        }
+    </style>
 </head>
 <body>
     <div class="container-fluid">
@@ -41,5 +55,17 @@
             </div>
         </div>
     </div>
+    <script>
+        function aumentar(e){
+            ele = document.getElementById(e)
+            if(ele.classList.contains('pequeno')){
+                ele.classList.remove('pequeno') 
+                ele.classList.add('grande') 
+            }else if(ele.classList.contains('grande')){
+                ele.classList.remove('grande') 
+                ele.classList.add('pequeno') 
+            }
+        };
+    </script>
 </body>
 </html>

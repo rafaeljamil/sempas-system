@@ -1,0 +1,38 @@
+<div style="border: 1px solid gray" class="container my-2">
+    <div class="row">
+        <h2>Tabela de Visitas</h2>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <!-- <th scope="col"></th> -->
+                    <th scope="col">Data</th>
+                    <th scope="col">Local</th>
+                    <th scope="col">Motivo</th>
+                    <th scope="col">Valor</th>
+                    <th scope="col">Ações</th>
+                    <!-- <th scope="col">Apagar</th> -->
+                </tr>
+            </thead>
+            <% var count = 0 %>
+            <% if(visita != '') { %>
+                <% visita.forEach(vis =>{ %>
+                    <tbody>
+                        <!-- <th scope="row" ></th> -->
+                        <td><%= vis.dataVisita.getDate() %>/<%= vis.dataVisita.getMonth() %>/<%= vis.dataVisita.getFullYear() %></td>
+                        <td><%= vis.local.toUpperCase() %></td>
+                        <td><%= vis.motivo %></td>
+                        <td><%= vis.valor %></td>
+                        <td class="col col-sm-2">
+                            <a class="d-inline btn btn-primary my-2" href="/cadastros/<%=cad.id%>/visitas/<%=vis.id%>">Ver</a>
+                            <a class="d-inline"><%-include('../partials/deleteForm.ejs', {scope:"Visita"})%></a>
+                        </td>
+                    </tbody>
+                <% }) %>
+            <% } %>
+        </table>
+        <div class="row">
+            <a class="col-sm-auto btn btn-primary my-2" href="/cadastros/<%=cad.id%>/visitas">Nova Visita</a>
+            
+        </div>
+    </div>
+</div>

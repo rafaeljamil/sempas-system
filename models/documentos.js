@@ -22,7 +22,7 @@ const documentosSchema = mongoose.Schema({
     usuarioId: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
-        ref: 'usuario'
+        ref: 'usuarios'
     },
     criadoEm: {
         type: Date,

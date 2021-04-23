@@ -1,0 +1,20 @@
+<div style="border: 1px solid gray" class="container my-2">
+    <div>
+        <h2>Documentos</h2>
+        <p>Clique na imagem para ampliar ou diminuir.</p>
+        <% if(docs != null && docs != '') { %>
+            <img id="rgFrente" class="pequeno" onclick="aumentar(this.id)" src="../<%=docs.rgFrenteImagemPath%>">
+            <% if(docs.rgCostaImagemPath != null && docs.rgCostaImagemPath != ''){%>
+                <img id="rgCosta" class="pequeno" onclick="aumentar(this.id)" src="../<%=docs.rgCostaImagemPath%>">
+            <% } %>
+            <img id="cpf" class="pequeno" onclick="aumentar(this.id)" src="../<%=docs.cpfImagemPath%>">
+            <img id="compRes" class="pequeno" onclick="aumentar(this.id)" src="../<%=docs.compResImagemPath%>">   
+        <% } %>
+    </div>
+    
+   <div class="row">
+        <a class="col-sm-auto btn btn-primary my-2" href="/cadastros/<%=cad.id%>/docs">Adicionar Documentos</a>
+        <div class="col"><%-include('../partials/deleteForm.ejs', {scope:"Documentos"})%></div>
+   </div>
+    
+</div>

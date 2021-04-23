@@ -1,9 +1,0 @@
-<% if(scope == "Cadastro") {%>
-    <form action="/cadastros/<%=cad.id%>/deletar?_method=DELETE" method="post">
-        <button class="my-2 btn btn-danger" type="submit">Apagar Cadastro</button>
-    </form>
-<% }else if(scope == "Documentos") {%>
-    <form action="/cadastros/<%=cad.id%>/docs/deletar?_method=DELETE" method="post">
-        <button class="my-2 btn btn-danger" type="submit">Apagar Documentos</button>
-    </form>
-<% } %>

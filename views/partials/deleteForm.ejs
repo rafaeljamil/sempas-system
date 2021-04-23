@@ -1,3 +1,17 @@
-<form action="<%= url %>/?_method=DELETE" method="post">
-    <button type="submit">Deletar</button>
-</form>
+<% if(scope == 'Documentos') { %>
+    <form action="/cadastros/<%=cad.id%>/docs/deletar?_method=DELETE" method="post">
+        <button class="my-2 btn btn-danger" type="submit">Apagar Documentos</button>
+    </form>
+<% } else if(scope == 'Relatório') { %>
+    <form action="/cadastros/<%=visita.usuarioId%>/visitas/<%=visita.id%>/relatorio/deletar?_method=DELETE" method="post">
+        <button class="my-2 btn btn-danger" type="submit">Apagar Relatório</button>
+    </form>
+<% } else if(scope == 'Cadastro') { %>
+    <form action="/cadastros/<%=cad.id%>/deletar?_method=DELETE" method="post">
+        <button class="my-2 btn btn-danger" type="submit">Apagar Cadastro</button>
+    </form>
+<% } else if(scope == 'Visita') { %>
+    <form class="d-inline" action="/cadastros/<%=cad.id%>/visita/deletar?_method=DELETE" method="post">
+        <button class="col-sm-auto btn btn-danger" type="submit">Apagar</button>
+    </form>
+<% } %>

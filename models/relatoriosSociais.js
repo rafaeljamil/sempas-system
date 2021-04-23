@@ -5,22 +5,22 @@ const relatorioSocialSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    usuario: {
+    visitaId: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
-        ref: 'usuario'
+        ref: 'visitas'
     },
     criadoEm:{
         type: Date,
         required: true,
         default: Date.now
     },
-    criadoPor: {
-        type: mongoose.Schema.Types.ObjectId,
-        required: true,
-        ref: 'operador',
-        default: 'Operador'
-    }
+    // criadoPor: {
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     required: true,
+    //     ref: 'operador',
+    //     default: 'Operador'
+    // }
 })
 
-module.exports = mongoose.model('relatorioSocial', relatorioSocialSchema)
+module.exports = mongoose.model('relatoriossociais', relatorioSocialSchema)

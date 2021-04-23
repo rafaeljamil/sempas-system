@@ -1,0 +1,10 @@
+<form action="/cadastros/<%=visita.usuarioId%>/visita/<%=visita.id%>relatorio/editar?_method=PUT" method="post">
+    <textarea name="editor"><%=rel.relatorio%></textarea>
+    <button class="btn btn-primary my-2" type="submit">Salvar Mudanças</button>
+    <a class="btn btn-danger my-2" href="/cadastros/<%=visita.usuarioId%>/visitas/<%=visita.id%>">Cancelar</a>
+</form>
+
+<script src="/node_modules/ckeditor4/ckeditor.js"></script>
+<script>
+    CKEDITOR.replace('editor');
+</script>

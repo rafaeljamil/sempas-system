@@ -1,0 +1,15 @@
+<div style="border: 1px solid gray" class="container my-2">
+    <div>
+        <h2>Relatório Social</h2>
+        <div>
+            <% if(rel) { %>
+                <div><%-rel.relatorio%></div>
+            <% } %>
+        </div>
+    </div>
+   <div class="row">
+        <a class="col-sm-auto btn btn-primary mx-2 my-2 " href="/cadastros/<%=cad.id%>/visitas/<%=visita.id%>/relatorio">Adicionar Relatório</a>
+        <a class="col-sm-auto btn btn-warning mx-2 my-2" href="/cadastros/<%=cad.id%>/visitas/<%=visita.id%>/relatorio/editar">Editar Relatório</a>
+        <div class="col"><%-include('../partials/deleteForm.ejs', {scope:"Relatório"})%></div>
+   </div>
+</div>

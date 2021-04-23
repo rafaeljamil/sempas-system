@@ -1,13 +1,15 @@
 const express = require('express')
 const router = express.Router()
-const Cadastro = require('../models/usuario')
+const Cadastro = require('../models/usuarios')
 const Docs = require('../models/documentos')
+const Visita = require('../models/visitas')
 const docsRoute = require('../routes/documentos')
-const fs = require('fs')
+const visitasRoute = require('../routes/visitas')
+// const fs = require('fs')
 
-//A rota de cadastros estava ficando grande demais, então separei a rota /docs 
+//A rota de cadastros estava ficando grande demais, então separei a rota /docs e /relatorio
 router.use('/:id/docs', docsRoute) 
-
+router.use('/:id/visitas', visitasRoute) 
 
 //console.log(upload)
 
@@ -87,9 +89,10 @@ router.get('/:id', async (req,res) => {
         //res.send("página do usuário cadastrado")
         let cad = await Cadastro.findById(req.params.id).populate('usuario').exec()
         let docs = await Docs.findOne({usuarioId: req.params.id}).populate('documentos').exec()
-        //console.log(docs)
+        let visita = await Visita.find({usuarioId: req.params.id}).populate('visitas').exec()
+        //console.log(visita)
         //console.log(docs.rgFrenteImagem)
-        res.render('cadastros/ver', {cad:cad, docs:docs, scope:""})
+        res.render('cadastros/ver', {cad:cad, docs:docs, visita:visita, scope:""})
     }catch{
         res.redirect('/')
     }

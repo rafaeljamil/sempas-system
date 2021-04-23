@@ -33,4 +33,4 @@ const operadorSchema = mongoose.Schema({
     }
 })
 
-module.exports = mongoose.model('operador', operadorSchema)
+module.exports = mongoose.model('operadores', operadorSchema)
