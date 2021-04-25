@@ -6,89 +6,93 @@
 
 <div class="container">
     <h3>Identificação</h3>
-    <div class="container-fluid d-flex flex-wrap mx-2 my-2 ">
-        <div class="mx-2 my-2 ">
-            <label for="nome">Nome Completo<label style="color:red;">*</label>:</label>
-            <input type="text" name="nome" value="<%=cad.nome.nomeCompleto%>">
-        </div>
-        <div class="mx-2 my-2 ">
-            <label for="apelido">Apelido (caso relevante): </label>
-            <input type="text" name="apelido" value="<%=cad.nome.apelido%>">
-        </div>
-        <div class="mx-2 my-2">
-            <label for="nomeMae">Nome da mãe<label style="color:red;">*</label>: </label>
-            <input type="text" name="nomeMae" value="<%=cad.nomeMae%>">
-        </div>
-        <div class="mx-2 my-2 ">
-            <label for="nis">NIS<label style="color:red;">*</label>: </label>
-            <input type="number" name="nis" value="<%=cad.nis%>">
-        </div>
-        <div class="mx-2 my-2 ">
-            <label for="cpf">CPF<label style="color:red;">*</label>: </label>
-            <input type="number" name="cpf" value="<%=cad.cpf%>">
-        </div>
-        <div class="mx-2 my-2 ">
-            <label for="rg">RG<label style="color:red;">*</label>: </label>
-            <input type="number" name="rg" value="<%=cad.rg.numero%>">
-        </div>
-        <div class="mx-2 my-2 ">
-           <label for="orgao">Órgão expedidor<label style="color:red;">*</label>: </label>
-            <input type="text" name="orgao" value="<%=cad.rg.orgaoExpedidor%>"> 
-        </div>
-        <div class="mx-2 my-2 ">
-            <label for="uf">UF<label style="color:red;">*</label>: </label>
-            <input type="text" name="uf" value="<%=cad.rg.uf%>">
-        </div>
-        <div class="mx-2 my-2 ">
-            <label for="dataEmissao">Data de emissão<label style="color:red;">*</label>: </label>
-            <input type="date" name="dataEmissao" value="<%=cad.rg.dataEmissao == null ? '' : cad.rg.dataEmissao.toISOString().split('T')[0] %>">
+    <div class="container">
+        <div class= "form-group">
+            <div class="row">
+                <div>
+                    <label for="nome">Nome Completo<label style="color:red;">*</label>:</label>
+                    <input class="form-control" type="text" name="nome" value="<%=cad.nome.nomeCompleto%>">
+                </div>
+                <div class="col">
+                    <label for="apelido">Apelido (caso relevante): </label>
+                    <input class="form-control" type="text" name="apelido" value="<%=cad.nome.apelido%>">
+
+                    <label for="cpf">CPF<label style="color:red;">*</label>: </label>
+                    <input class="form-control" type="number" name="cpf" value="<%=cad.cpf%>">
+
+                    
+
+                    <label for="orgao">Órgão expedidor<label style="color:red;">*</label>: </label>
+                    <input class="form-control" type="text" name="orgao" value="<%=cad.rg.orgaoExpedidor%>">   
+                
+                    <label for="uf">UF<label style="color:red;">*</label>: </label>
+                    <input class="form-control" type="text" name="uf" value="<%=cad.rg.uf%>">
+                </div>
+                <div class="col">
+                    
+                    <label for="nomeMae">Nome da mãe<label style="color:red;">*</label>: </label>
+                    <input class="form-control" type="text" name="nomeMae" value="<%=cad.nomeMae%>">
+
+                    <label for="nis">NIS<label style="color:red;">*</label>: </label>
+                    <input class="form-control" type="number" name="nis" value="<%=cad.nis%>">
+
+                    <label for="rg">RG<label style="color:red;">*</label>: </label>
+                    <input class="form-control" type="number" name="rg" value="<%=cad.rg.numero%>">
+
+                    <label for="dataEmissao">Data de emissão<label style="color:red;">*</label>: </label>
+                    <input class="form-control" type="date" name="dataEmissao" value="<%=cad.rg.dataEmissao == null ? '' : cad.rg.dataEmissao.toISOString().split('T')[0] %>">
+                </div>
+            </div>
         </div>
     </div>
     <h3>Endereço</h3>
-    <div class="container-fluid d-flex flex-wrap mx-2 my-2 px-2">
-        <div class="mx-2 my-2 ">
-            <label for="endereco">Endereço<label style="color:red;">*</label>: </label>
-            <input type="text" name="endereco" value="<%=cad.endereco.logradouro%>">
+    <div class="container">
+        <div class="form-group">
+            <div class="row">
+                <div>
+                    <label for="endereco">Endereço<label style="color:red;">*</label>: </label>
+                    <input class="form-control" type="text" name="endereco" value="<%=cad.endereco.logradouro%>">
+                </div>
+                <div class="col">
+                    <label for="numero">Número: </label>
+                    <input class="form-control" type="number" name="numero" value="<%=cad.endereco.numero%>">
+
+                    <label for="complemento">Complemento: </label>
+                    <input class="form-control" type="text" name="complemento" value="<%=cad.endereco.complemento%>">
+
+                    <label for="cidade">Cidade<label style="color:red;">*</label>: </label>
+                    <input class="form-control" type="text" name="cidade" value="<%=cad.endereco.cidade%>">
+                </div>
+                <div class="col">
+                    <label for="cep">CEP<label style="color:red;">*</label>: </label>
+                    <input class="form-control" type="number" name="cep" value="<%=cad.endereco.cep%>">
+
+                    <label for="bairro">Bairro<label style="color:red;">*</label>: </label>
+                    <input class="form-control" type="text" name="bairro" value="<%=cad.endereco.bairro%>">
+
+                    <label for="estado">Estado<label style="color:red;">*</label>: </label>
+                    <input class="form-control" type="text" name="estado" value="<%=cad.endereco.estado%>">
+                </div>
+            </div>
         </div>
-        <div class="mx-2 my-2 ">
-            <label for="numero">Número: </label>
-            <input type="number" name="numero" value="<%=cad.endereco.numero%>">
-        </div>
-        <div class="mx-2 my-2 ">
-            <label for="complemento">Complemento: </label>
-            <input type="text" name="complemento" value="<%=cad.endereco.complemento%>">
-        </div>
-        <div class="mx-2 my-2 ">
-            <label for="cep">CEP<label style="color:red;">*</label>: </label>
-            <input type="number" name="cep" value="<%=cad.endereco.cep%>">
-        </div>
-        <div class="mx-2 my-2 ">
-            <label for="bairro">Bairro<label style="color:red;">*</label>: </label>
-            <input type="text" name="bairro" value="<%=cad.endereco.bairro%>">
-        </div>
-        <div class="mx-2 my-2 ">
-            <label for="cidade">Cidade<label style="color:red;">*</label>: </label>
-            <input type="text" name="cidade" value="<%=cad.endereco.cidade%>">
-        </div>
-        <div class="mx-2 my-2 ">
-            <label for="estado">Estado<label style="color:red;">*</label>: </label>
-            <input type="text" name="estado" value="<%=cad.endereco.estado%>">
-        </div>
-        
     </div>
     <h3>Contatos</h3>
-    <div class="container-fluid d-flex flex-wrap mx-2 my-2 px-2">
-        <div class="mx-2 my-2 ">
-            <label for="telFixo">Telefone fixo: </label>
-            <input type="number" name="telFixo" value="<%=cad.contatos.fixo%>">
-        </div>
-        <div class="mx-2 my-2 ">
-            <label for="cel">Celular<label style="color:red;">*</label>: </label>
-            <input type="number" name="cel" value="<%=cad.contatos.celular%>">  
-        </div>
-        <div class="mx-2 my-2 ">
-            <label for="email">E-mail: </label>
-            <input type="email" name="email" value="<%=cad.contatos.email%>">  
+    <div class="container">
+        <div class="form-group">
+            <div class="row">
+                <div class="col">
+                    <label for="telFixo">Telefone fixo: </label>
+                    <input class="form-control" type="number" name="telFixo" value="<%=cad.contatos.fixo%>">
+                </div>
+                <div class="col">
+                    <label for="cel">Celular<label style="color:red;">*</label>: </label>
+                    <input class="form-control" type="number" name="cel" value="<%=cad.contatos.celular%>">
+                </div>
+                <div class="col">
+                    <label for="email">E-mail: </label>
+                    <input class="form-control" type="email" name="email" value="<%=cad.contatos.email%>">
+                </div>
+            </div>
         </div>
     </div>
 </div>

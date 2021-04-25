@@ -5,15 +5,21 @@ const Relatorio = require('../models/relatoriosSociais')
 const router = express.Router({mergeParams:true})
 
 router.get('/', async (req,res) => {
-    console.log(req.params.id)
-    const visita = await Visita.findById(req.params.id)
+    //console.log(req.params.id)
+    const visita = await Visita.findById(req.params.id).populate('visitas').exec()
+    const rel = await Relatorio.findOne({visitaId:req.params.id})
     // console.log(cad)
-
-    res.render('partials/relatorioForm.ejs', {visita:visita})
+    let mensagem
+    if (rel != null){
+        res.redirect(`/cadastros/${visita.usuarioId}/visitas/${visita.id}`)
+        return mensagem = "Não permitido mais de um relatório por visita"
+    }
+    res.render('partials/relatorioForm.ejs', {visita:visita, mensagem:mensagem})
+    //console.log(visita.relatorioId)
 })
 
 router.post('/', async (req,res) => {
-    const visita = await Visita.findById(req.params.id)
+    let visita = await Visita.findById(req.params.id).populate('visitas')
     try{
         //console.log(req.body.editor)
         const rel = new Relatorio({
@@ -58,10 +64,12 @@ router.delete('/deletar', async (req,res) => {
         const rel = await Relatorio.findOne({visitaId: req.params.id})
         //console.log(visita.valor)
         //console.log(rel.id)
-        rel.remove()
+        await rel.remove()
+        console.log("Relatório removido com sucesso")
         res.redirect(`/cadastros/${visita.usuarioId}/visitas/${req.params.id}`)
-    }catch{
-        res.redirect(`/cadastros/${visita.usuarioId}/visitas/${req.params.id}/relatorio`)
+    }catch(err){
+        console.log(err)
+        res.redirect(`/cadastros/${visita.usuarioId}/visitas/${req.params.id}`)
     }
 })
 

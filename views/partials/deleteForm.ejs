@@ -11,7 +11,7 @@
         <button class="my-2 btn btn-danger" type="submit">Apagar Cadastro</button>
     </form>
 <% } else if(scope == 'Visita') { %>
-    <form class="d-inline" action="/cadastros/<%=cad.id%>/visita/deletar?_method=DELETE" method="post">
+    <form class="d-inline" action="/cadastros/<%=cad.id%>/visitas/<%=vis.id%>/deletar?_method=DELETE" method="post">
         <button class="col-sm-auto btn btn-danger" type="submit">Apagar</button>
     </form>
 <% } %>

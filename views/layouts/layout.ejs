@@ -46,6 +46,9 @@
     <div class="container-fluid">
         <div class="my-4 row justify-content-center">
             <div class="col-lg-auto">
+                <% if(locals.mensagem) { %>
+                    <p><%=mensagem%></p>
+                <% } %>
                 <%-body%>
             </div>
         </div>

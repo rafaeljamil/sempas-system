@@ -38,11 +38,6 @@ const usuarioSchema = mongoose.Schema({
         celular: { type: Number, required: true },
         email: { type: String }
     },
-    relatorioSocial:{
-        type: Boolean,
-        required: true,
-        default: false
-    },
     criadoEm: {
         type: Date,
         required: true,

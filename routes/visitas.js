@@ -42,4 +42,38 @@ router.get("/:id", async (req,res) => {
         res.redirect(`/cadastros/${cad.id}`)
     }
 })
+
+router.put("/:id", async (req,res) => {
+    let visita = await Visita.findById(req.params.id)
+    let cad = await Cadastro.findById(visita.usuarioId)
+    try{
+        visita.usuarioId = req.params.id,
+        visita.dataVisita = req.body.dataVisita,
+        visita.local = req.body.localVisita,
+        visita.motivo = req.body.motivoVisita,
+        visita.valor = req.body.valor,
+        visita.observacoes = req.body.observacoes
+        await visita.save()
+        console.log("Visita atualizada com sucesso.")
+        res.redirect(`/cadastros/${visita.usuarioId}/visitas/${req.params.id}`)
+    }catch{
+        res.redirect(`/cadastros/${cad.id}`)
+    }
+})
+
+router.delete("/:id/deletar", async (req,res) => {
+    let visita = await Visita.findById(req.params.id)
+    let cad = await Cadastro.findById(visita.usuarioId)
+    let rel = await Relatorio.findOne({visitaId:visita.id})
+    try{
+        await rel.remove()
+        await visita.remove()
+        console.log("Visita e relatório apagados com sucesso.")
+        res.redirect(`/cadastros/${cad.id}`)
+    }
+    catch{
+        res.redirect(`/cadastros/${visita.usuarioId}/visitas/${req.params.id}`)
+    }
+})
+
 module.exports = router;

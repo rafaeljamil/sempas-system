@@ -30,11 +30,6 @@ const visitasSchema = mongoose.Schema ({
     observacoes:{
         type: String
     },
-    relatorioId:{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'relatoriossociais',
-        default: null
-    }
 })
 
 module.exports = mongoose.model('visitas', visitasSchema)
