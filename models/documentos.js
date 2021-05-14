@@ -8,7 +8,7 @@ const documentosSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    rgCostaImagem:{
+    rgVersoImagem:{
         type: String
     },
     cpfImagem: {
@@ -34,27 +34,27 @@ const documentosSchema = mongoose.Schema({
 //Decodificar as imagens
 //RG
 documentosSchema.virtual('rgFrenteImagemPath').get(function(){
-    if(this.rgFrenteImagem != null){
-        return path.join('./public/', caminhoBaseDocs, this.rgFrenteImagem)
+    if(this.rgFrenteImagem != null && this.usuarioId != null){
+        return path.join('./public/', caminhoBaseDocs,  this.rgFrenteImagem)
     }
 })
 
-documentosSchema.virtual('rgCostaImagemPath').get(function(){
-    if(this.rgCostaImagem != null){
-        return path.join('public/', caminhoBaseDocs, this.rgCostaImagem)
+documentosSchema.virtual('rgVersoImagemPath').get(function(){
+    if(this.rgVersoImagem != null && this.usuarioId != null){
+        return path.join('public/', caminhoBaseDocs, this.rgVersoImagem)
     }
 })
 
 //CPF
 documentosSchema.virtual('cpfImagemPath').get(function(){
-    if(this.cpfImagem != null){
+    if(this.cpfImagem != null && this.usuarioId != null){
         return path.join('public/', caminhoBaseDocs, this.cpfImagem)
     }
 })
 
 //Comprovante de residência
 documentosSchema.virtual('compResImagemPath').get(function(){
-    if(this.compResImagem != null){
+    if(this.compResImagem != null && this.usuarioId != null){
         return path.join('public/', caminhoBaseDocs, this.compResImagem)
     }
 })

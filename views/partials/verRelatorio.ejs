@@ -1,9 +1,13 @@
+<!-- Quill CSS -->
+<link rel="stylesheet" href="/node_modules/quill/dist/quill.snow.css">
+
 <div style="border: 1px solid gray" class="container my-2">
     <div>
         <h2>Relatório Social</h2>
-        <div>
+        <div id="quill">
             <% if(rel) { %>
-                <div><%-rel.relatorio%></div>
+                <div id="relatorio" style="display:none;"><%= rel.relatorio %></div>
+                <div id="ver"></div>
             <% } %>
         </div>
     </div>
@@ -13,3 +17,10 @@
         <div class="col"><%-include('../partials/deleteForm.ejs', {scope:"Relatório"})%></div>
    </div>
 </div>
+<!-- Quill -->
+<script src="/node_modules/quill/dist/quill.js"></script>
+<script>
+    var quill = new Quill('#ver', {theme:'snow', readOnly: true});
+    rel = document.querySelector('#relatorio');
+    quill.setContents(JSON.parse(rel.innerHTML));
+</script>

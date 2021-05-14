@@ -4,12 +4,16 @@ const Visita = require('../models/visitas')
 const Relatorio = require('../models/relatoriosSociais')
 const router = express.Router({mergeParams:true})
 const relatorioRoute = require('../routes/relatorio')
+const imprimirRoute = require('../routes/imprimir')
 
 router.use('/:id/relatorio', relatorioRoute)
+router.use('/:id/imprimir', imprimirRoute)
 
 router.get("/", async (req,res) => {
     const cad = await Cadastro.findById(req.params.id)
-    res.render("visitas/novaVisita", {cad:cad})
+    const rel = await Relatorio.findOne({usuarioId: req.params.id})
+    //console.log(rel.relatorioPath)
+    res.render("visitas/novaVisita", {cad:cad, rel:rel})
 })
 
 router.post("/", async (req,res) => {

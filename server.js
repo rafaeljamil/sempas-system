@@ -25,7 +25,7 @@ app.set('layout', 'layouts/layout')
 app.use(ejsLayouts)
 app.use(express.json())
 app.use('/public', express.static(__dirname + "/public"))
-app.use('/node_modules', express.static(__dirname + "/node_modules"))
+app.use('/node_modules', express.static(__dirname + "/node_modules")) //Tenho que marcar a pasta como static pra rodar o CKEditor e desmarcar pra instalar módulos
 app.use(express.urlencoded({extended:false, limit:'5mb'}))
 app.use(methodOverride('_method'))
 

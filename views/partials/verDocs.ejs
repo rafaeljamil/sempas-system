@@ -4,8 +4,8 @@
         <p>Clique na imagem para ampliar ou diminuir.</p>
         <% if(docs != null && docs != '') { %>
             <img id="rgFrente" class="pequeno" onclick="aumentar(this.id)" src="../<%=docs.rgFrenteImagemPath%>">
-            <% if(docs.rgCostaImagemPath != null && docs.rgCostaImagemPath != ''){%>
-                <img id="rgCosta" class="pequeno" onclick="aumentar(this.id)" src="../<%=docs.rgCostaImagemPath%>">
+            <% if(docs.rgVersoImagemPath != null && docs.rgVersoImagemPath != ''){%>
+                <img id="rgVerso" class="pequeno" onclick="aumentar(this.id)" src="../<%=docs.rgVersoImagemPath%>">
             <% } %>
             <img id="cpf" class="pequeno" onclick="aumentar(this.id)" src="../<%=docs.cpfImagemPath%>">
             <img id="compRes" class="pequeno" onclick="aumentar(this.id)" src="../<%=docs.compResImagemPath%>">   

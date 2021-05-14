@@ -13,13 +13,14 @@ const path = require('path')
 // const filename = function (req, file, cb) {cb( null, date + '-' + file.fieldname + '.jpeg')}
 
 const uploadPath = path.join( './public/', Docs.caminhoBaseDocs)
-// const destination = function (req, file, cb) {cb(null, uploadPath)}
-const fileFilter = function (req, file, cb) {cb(null, imageMimeTypes.includes(file.mimetype))}
-// const storage = multer.diskStorage({filename, destination})
+
+//const fileFilter = function (req, file, cb) {cb(null, imageMimeTypes.includes(file.mimetype))}
+
 
 const storage = multer.memoryStorage()
 const upload = multer({
     storage: storage,
+    fileFilter: imageMimeTypes
 })
 
 
@@ -34,16 +35,12 @@ router.get('/', async (req,res) => {
 
 router.post('/', upload.any(), async (req,res) => {
     //Tentando criar uma lógica pra substituir documento se já existe 
-    //ou criar se ainda não existe
+    //ou criar se ainda não existe. Ainda não deu certo
     let docs = new Docs({
         usuarioId : req.params.id,
     })
-    //console.log(docs)
     const date =  Date.now()
-    
     const files = req.files
-    
-    //console.log(files)
     let fieldname
     try{
         console.log("Criando novos documentos")
@@ -51,11 +48,9 @@ router.post('/', upload.any(), async (req,res) => {
             
             fieldname = files[file].fieldname
             filename = date + '-' + fieldname + '.jpeg'
-            //console.log(fname)
-            //console.log(fieldname)
-            //console.log(files[file])
             fBuffer = files[file].buffer
-            //console.log(fBuffer)
+            //console.log(path.join(uploadPath, filename))
+            //fazendo upload com Sharp
             sharp(fBuffer)
                 .resize(500)
                 .toFormat('jpeg')
@@ -65,8 +60,8 @@ router.post('/', upload.any(), async (req,res) => {
                 case 'rgFrente':
                     docs.rgFrenteImagem = filename;
                     break;
-                case 'rgCosta':
-                    docs.rgCostaImagem = filename;
+                case 'rgVerso':
+                    docs.rgVersoImagem = filename;
                     break;
                 case 'cpfFrente':
                     docs.cpfImagem = filename;
@@ -108,11 +103,11 @@ router.delete('/deletar', async (req,res) => {
                 console.log(docs.compResImagemPath + " deletado com sucesso.")
             }
         }))
-        if(docs.rgCostaImagem != null && docs.rgCostaImagem != ''){
-            fs.unlink( docs.rgCostaImagemPath, (err => {
+        if(docs.rgVersoImagem != null && docs.rgVersoImagem != ''){
+            fs.unlink( docs.rgVersoImagemPath, (err => {
                 if (err) console.log(err);
                 else{
-                    console.log(docs.rgCostaImagemPath + " deletado com sucesso.")
+                    console.log(docs.rgVersoImagemPath + " deletado com sucesso.")
                 }
             }))
         }

@@ -89,7 +89,7 @@ router.get('/:id', async (req,res) => {
         //res.send("página do usuário cadastrado")
         let cad = await Cadastro.findById(req.params.id).populate('usuario').exec()
         let docs = await Docs.findOne({usuarioId: req.params.id}).populate('documentos').exec()
-        let visita = await Visita.find({usuarioId: req.params.id}).populate('visitas').exec()
+        let visita = await Visita.find({usuarioId: req.params.id}).populate('visitas').sort({dataVisita: 'asc'})
         //console.log(visita)
         //console.log(docs.rgFrenteImagem)
         res.render('cadastros/ver', {cad:cad, docs:docs, visita:visita, scope:""})
@@ -156,10 +156,12 @@ router.delete('/:id/deletar', async (req,res) => {
     let docs
     let errors = []
     try{
-        cadas = await Cadastro.findById(req.params.id).exec()
-        docs = await Docs.findOne({usuarioId: req.params.id}).exec() //o find() tava retornando undefined
-        if(cadas && docs == null){
-            if(docs == null && docs == ''){
+        cadas = await Cadastro.findById(req.params.id)
+        docs = await Docs.findOne({usuarioId: req.params.id}) //o find() tava retornando undefined
+        console.log(cadas)
+        console.log(docs)
+        if(cadas){
+            if(docs == null){
                 await cadas.remove()
                 res.redirect('/cadastros')
             }
