@@ -5,7 +5,7 @@ const Atendimento = require('../models/atendimentos')
 router.get('/', async (req,res) => {
     atendimento = await Atendimento.find({})
     res.render('recepcao/recepcao', {atendimento:atendimento})
-    console.log(atendimento)
+    //console.log(atendimento)
 })
 
 router.get('/novo', (req,res) => {
@@ -28,7 +28,7 @@ router.post('/novo', async (req,res)=>{
         // console.log("Nome: "+req.body.nome)
         // console.log("Endereço: "+req.body.endereco)
         // console.log(atendimento)
-        res.redirect('/')
+        res.redirect('/recepcao')
     }catch(err){
         if(err){console.log(err)}
         res.redirect('/')
