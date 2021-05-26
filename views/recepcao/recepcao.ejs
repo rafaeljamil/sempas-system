@@ -1,0 +1,33 @@
+<% var meses = ["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"]; %>
+<% var data = new Date() %>
+<% var ano = data.getFullYear() %>
+<% var mes = data.getMonth() %>
+<% var totalAno = 0 %>
+<% var totalMes = 0 %>
+<% if (atendimento) {%>
+    <% atendimento.forEach(a=>{ %>
+        <% if (a.criadoEm.getFullYear() == ano) {%>
+            <% totalAno += 1 %>
+        <% }if(a.criadoEm.getMonth() == mes) {%>
+            <% totalMes += 1 %>
+        <% } %>
+    <% }) %>
+<% } %>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col">
+            <h2 class="text-center">Recepção</h2>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-sm-auto">
+            <a class="btn btn-primary my-2" href="recepcao/novo">Novo Atendimento</a>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col">
+            <p class="text-center">Atendimentos no ano <%=ano%>: <%=totalAno%>. Mês de <%=meses[mes]%>: <%=totalMes%></p>  
+        </div>
+    </div>
+</div>

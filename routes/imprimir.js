@@ -6,7 +6,7 @@ const Relatorio = require('../models/relatoriosSociais')
 const pdf = require('pdfkit')
 const fs = require('fs')
 const path = require('path')
-//const htmlToPdf = require('html-pdf-node')
+const htmlToPdf = require('html-pdf')
 
 
 const imagePath = path.resolve(__filename ,'../../public/images/')
@@ -17,15 +17,10 @@ router.get('/', async (req,res) => {
     let cad = await Cadastro.findById(visita.usuarioId)
     let rel = await Relatorio.findOne({visitaId:visita.id})
 
-    
-
-
     try{
-        //let options = {format:"A4"}
-        //let arq = rel.relatorio
-        //let arquivo = {content: arq}
-        //let relatorioTexto = htmlToPdf.generatePdf(arquivo, options).then(pdfbuffer => {return pdfbuffer})
-        //console.log(relatorioTexto)
+        console.log(rel.pdfBlob)
+        let relatorio = htmlToPdf.create(rel.pdfBlob)
+        console.log(relatorio)
         const doc = new pdf()
         //const breaker = '_'
         const mes = cad.rg.dataEmissao.getMonth()+1
@@ -58,7 +53,7 @@ router.get('/', async (req,res) => {
             'Estado: ' + cad.endereco.estado + '. ' 
         ).moveDown(1)
         doc.fontSize(16).text('Relatório da visita:')
-        doc.fontSize(12).text(rel.relatorio)
+        doc.fontSize(12).text(relatorio)
         doc.end()
         console.log("Documento gerado com sucesso.")
     }

@@ -7,7 +7,7 @@ const sharp = require('sharp')
 
 //Multer setup
 const multer = require('multer')
-const imageMimeTypes = ['image/jpeg', 'image/png', 'image/gif']
+const imageMimeTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif']
 const path = require('path')
 
 // const filename = function (req, file, cb) {cb( null, date + '-' + file.fieldname + '.jpeg')}

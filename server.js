@@ -10,6 +10,7 @@ const ejsLayouts = require('express-ejs-layouts')
 const indexRoute = require('./routes/index')
 const loginRoute = require('./routes/login')
 const cadRoute = require('./routes/cadastros')
+const recepRoute = require('./routes/recepcao')
 const methodOverride = require('method-override')
 
 const port = '3001'
@@ -31,6 +32,7 @@ app.use(methodOverride('_method'))
 
 app.use('/', indexRoute)
 app.use('/login', loginRoute)
+app.use('/recepcao', recepRoute)
 app.use('/cadastros', cadRoute)
 
 app.listen(port, (req,res) => {

@@ -23,13 +23,17 @@ router.get('/', async (req,res) => {
 router.post('/', async (req,res) => {
     let visita = await Visita.findById(req.params.id).populate('visitas')
     let relatorio = req.body.body
+    let pdfBlob = req.body.pdfBlob
     let dataVisita = visita.dataVisita.toISOString().split('T')[0]
     //console.log(relatorio)
     try{
         const rel = new Relatorio({
             visitaId: req.params.id,
-            relatorio: relatorio
+            relatorio: relatorio,
+            pdfBlob: pdfBlob
         })
+        console.log("Quill Delta: "+relatorio)
+        console.log("PDF Blob: "+pdfBlob)
         await rel.save()
     }catch(err){
         console.log(err)
@@ -64,12 +68,12 @@ router.delete('/deletar', async (req,res) => {
         //console.log(visita.valor)
         //console.log(rel.id)
         //console.log(rel.relatorio)
-        fs.unlink(rel.relatorio, (err => {
-            if (err) console.log(err);
-            else{
-                console.log(rel.relatorio + " deletado com sucesso.")
-            }
-        }))
+        // fs.unlink(rel.relatorio, (err => {
+        //     if (err) console.log(err);
+        //     else{
+        //         console.log(rel.relatorio + " deletado com sucesso.")
+        //     }
+        // }))
         await rel.remove()
         console.log("Relatório removido com sucesso")
         res.redirect(`/cadastros/${visita.usuarioId}/visitas/${req.params.id}`)

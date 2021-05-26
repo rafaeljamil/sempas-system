@@ -1,0 +1,53 @@
+<div class="row justify-content-center">
+    <div class="col-lg-auto">
+        <label style="color:red;">*</label><label> - Campos Obrigatórios</label> 
+    </div>
+</div>
+
+<div class="container row">
+    <h3>Identificação</h3>
+    <div class="container">
+        <div class= "form-group">
+            <div class="row">
+                <form action="" method="post">
+                    <div>
+                        <label for="nome">Nome Completo<label style="color:red;">*</label>:</label>
+                        <input class="form-control" type="text" name="nome" value="<%=atendimento.nome%>">
+                    </div>
+                    <div>
+                        <label for="endereco">Endereço<label style="color:red;">*</label>:</label>
+                        <input class="form-control" type="text" name="endereco" value="<%=atendimento.endereco%>">
+                    </div>
+                    <div class="row">
+                        <div class="col">
+
+                            <label for="cpf">CPF<label style="color:red;">*</label>: </label>
+                            <input class="form-control" type="number" name="cpf" value="<%=atendimento.cpf%>">
+    
+                        </div>
+                        <div class="col">
+    
+                            <label for="nis">NIS<label style="color:red;">*</label>: </label>
+                            <input class="form-control" type="number" name="nis" value="<%=atendimento.nis%>">
+    
+                        </div>
+                        <div class="col">
+    
+                            <label for="rg">RG<label style="color:red;">*</label>: </label>
+                            <input class="form-control" type="number" name="rg" value="<%=atendimento.rg%>">
+                        
+                        </div>
+                    </div>
+                    <div>
+                        <label for="atendimento">Atendimento<label style="color:red;">*</label>: </label>
+                        <input type="text" name="atendimento" class="form-control">
+                    </div>
+                    <div>
+                        <input class="btn btn-primary my-2" type="submit" value="Salvar">
+                        <a href="/recepcao" class="btn btn-secondary">Voltar</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

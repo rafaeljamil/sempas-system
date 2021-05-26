@@ -8,6 +8,10 @@ const relatorioSocialSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    pdfBlob:{
+        type: String,
+        required: false
+    },
     visitaId: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
