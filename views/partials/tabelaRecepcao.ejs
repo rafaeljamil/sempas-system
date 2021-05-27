@@ -1,0 +1,39 @@
+<div style="border: 1px solid gray" class="container my-2">
+    <div class="row">
+        <h2>Tabela de Atendimentos</h2>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <!-- <th scope="col"></th> -->
+                    <th scope="col">Data</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Endereço</th>
+                    <th scope="col">CPF</th>
+                    <th scope="col">NIS</th>
+                    <th scope="col">RG</th>
+                    <th scope="col">Atendimento</th>
+                    <!-- <th scope="col">Apagar</th> -->
+                </tr>
+            </thead>
+            <% var count = 0 %>
+            <% if(atendimento != '') { %>
+                <% atendimento.forEach(ate =>{ %>
+                    <tbody>
+                        <!-- <th scope="row" ></th> -->
+                        <td class="col col-sm-1"><%=ate.criadoEm.getDate() %>/<%= ate.criadoEm.getMonth() + 1 %>/<%= ate.criadoEm.getFullYear() %></td>
+                        <td><%= ate.nome %></td>
+                        <td><%= ate.endereco %></td>
+                        <td><%= ate.cpf %></td>
+                        <td><%= ate.nis %></td>
+                        <td><%= ate.rg %></td>
+                        <td><%= ate.atendimento %></td>
+                        <td class="col col-sm-2">
+                            <a class="d-inline btn btn-primary my-2" href="/recepcao/<%=ate.id%>">Ver</a>
+                            <a class="d-inline"><%-include('../partials/deleteForm.ejs', {ate:ate, scope:"Recepção"})%></a>
+                        </td>
+                    </tbody>
+                <% }) %>
+            <% } %>
+        </table>
+    </div>
+</div>

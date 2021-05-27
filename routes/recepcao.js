@@ -34,5 +34,24 @@ router.post('/novo', async (req,res)=>{
         res.redirect('/')
     }
 })
+router.get('/:id', async (req,res) => {
+    res.send('ver')
+})
+
+router.post('/:id', async (req,res) => {
+    res.send('modificar')
+})
+
+router.delete('/:id/deletar', async (req,res) => {
+    //res.send("deletar")
+    const atendimento = await Atendimento.findById(req.params.id)
+    try{
+        await atendimento.remove()
+        res.redirect('/recepcao')
+    }
+    catch{
+        res.redirect('/recepcao')
+    }
+})
 
 module.exports = router

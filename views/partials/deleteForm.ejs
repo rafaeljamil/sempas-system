@@ -14,4 +14,8 @@
     <form class="d-inline" action="/cadastros/<%=cad.id%>/visitas/<%=vis.id%>/deletar?_method=DELETE" method="post">
         <button class="col-sm-auto btn btn-danger" type="submit">Apagar</button>
     </form>
+<% } else if(scope == 'Recepção') { %>
+    <form class="d-inline" action="/recepcao/<%= ate.id %>/deletar?_method=DELETE" method="post">
+        <button class="col-sm-auto btn btn-danger" type="submit">Apagar</button>
+    </form>
 <% } %>
