@@ -11,6 +11,7 @@ const indexRoute = require('./routes/index')
 const loginRoute = require('./routes/login')
 const cadRoute = require('./routes/cadastros')
 const recepRoute = require('./routes/recepcao')
+const garagemRoute = require('./routes/garagem')
 const methodOverride = require('method-override')
 
 const port = '3001'
@@ -34,6 +35,7 @@ app.use('/', indexRoute)
 app.use('/login', loginRoute)
 app.use('/recepcao', recepRoute)
 app.use('/cadastros', cadRoute)
+app.use('/garagem', garagemRoute)
 
 app.listen(port, (req,res) => {
     console.log('Servidor iniciado. Porta: '+port)
