@@ -1,0 +1,34 @@
+<div style="border: 1px solid gray" class="container-fluid mt-2">
+    <h2>Últimas Rotas:</h2>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <!-- <th scope="col"></th> -->
+                <th scope="col">Placa</th>
+                <th scope="col">KM Inicial</th>
+                <th scope="col">KM Final</th>
+                <th scope="col">Origem</th>
+                <th scope="col">Destino</th>
+                <th scope="col">Responsável</th>
+            </tr>
+        </thead>
+        <% rotas.forEach(r => { %>
+            <tbody>
+                <tr>
+                    <!-- <th scope="row"></th> -->
+                    <td class="col-md-auto"><%=r.placa%></td>
+                    <td class="col-md-auto"><%=r.kmInicial%></td>
+                    <td class="col-md-auto"><%=r.kmFinal%></td>
+                    <td class="col-md-auto"><%=r.origem%></td>
+                    <td class="col-md-auto"><%=r.destino%></td>
+                    <td class="col-md-auto"><%=r.responsavel%></td>
+                    <td class="col col-sm-2">
+                        <a class="d-inline btn btn-primary my-2" href="/garagem/rota/<%=r.id%>">Ver</a>
+                        <a class="d-inline"><%-include('../partials/deleteForm.ejs', {r:r, scope:"Rotas"})%></a>
+                    </td>
+                </tr>
+            </tbody>
+        <% }) %>
+    </table>
+</div>
+

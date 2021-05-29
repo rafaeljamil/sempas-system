@@ -1,0 +1,26 @@
+<div class="container-fluid text-start">
+    <div class="row justify-content-center">
+        <div class="col-6">
+            <label for="placa">Veículo: </label>
+            <select name="placa">
+                <% veiculos.forEach(v => { %>
+                    <option class="form-control" value="<%= v.placa %>"><%= v.placa %></option>
+                <% }) %>
+            </select><br>
+            <label for="km-inicial">KM inicial: </label>
+            <input class="form-control" type="number" name="kmInicial">
+            <label for="km-final">KM final: </label>
+            <input class="form-control" type="number" name="kmFinal">
+            <label for="origem">Origem: </label>
+            <input class="form-control" type="text" name="origem">
+            <label for="destino">Destino: </label>
+            <input class="form-control" type="text" name="destino">
+            <label for="responsavel">Responsável: </label>
+            <input class="form-control" type="text" name="responsavel">
+            <div class="mt-2">
+                <button class="btn btn-primary" type="submit">Salvar</button>
+                <a class="btn btn-secondary" href="/garagem">Voltar</a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,30 @@
+<div style="border: 1px solid gray" class="container-fluid mt-2">
+    <h2>Frota:</h2>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <!-- <th scope="col"></th> -->
+                <th scope="col">Placa</th>
+                <th scope="col">Marca</th>
+                <th scope="col">Modelo</th>
+                <th scope="col">KM</th>
+            </tr>
+        </thead>
+        <% veiculos.forEach(v => { %>
+            <tbody>
+                <tr>
+                    <!-- <th scope="row"></th> -->
+                    <td class="col-md-auto"><%=v.placa%></td>
+                    <td class="col-md-auto"><%=v.marca%></td>
+                    <td class="col-md-auto"><%=v.modelo%></td>
+                    <td class="col-md-auto"><%=v.km%></td>
+                    <td class="col col-sm-2">
+                        <a class="d-inline btn btn-primary my-2" href="/garagem/veiculo/<%=v.id%>">Ver</a>
+                        <a class="d-inline"><%-include('../partials/deleteForm.ejs', {v:v, scope:"Veiculos"})%></a>
+                    </td>
+                </tr>
+            </tbody>
+        <% }) %>
+    </table>
+</div>
+

@@ -1,0 +1,21 @@
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col">
+            <h2 class="text-center">Garagem</h2>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-sm-auto my-2">
+            <a class="btn btn-primary" href="/garagem/veiculo">Novo Veículo</a>
+            <a class="btn btn-primary" href="/garagem/rota">Nova Rota</a>
+        </div>
+    </div>
+    <div class="row">
+        <%- include('__veiculosTabela.ejs') %>
+    </div>
+    <div class="row">
+        <%- include('__rotasTabela.ejs') %>
+    </div>
+</div>
+
+

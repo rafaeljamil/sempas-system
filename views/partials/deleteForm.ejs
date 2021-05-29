@@ -18,4 +18,12 @@
     <form class="d-inline" action="/recepcao/<%= ate.id %>/deletar?_method=DELETE" method="post">
         <button class="col-sm-auto btn btn-danger" type="submit">Apagar</button>
     </form>
+<% } else if(scope == 'Veiculos') { %>
+    <form class="d-inline" action="/garagem/<%= v.id %>/deletar?_method=DELETE" method="post">
+        <button class="col-sm-auto btn btn-danger" type="submit">Apagar</button>
+    </form>
+<% } else if(scope == 'Rotas') { %>
+    <form class="d-inline" action="/rota/<%= r.id %>/deletar?_method=DELETE" method="post">
+        <button class="col-sm-auto btn btn-danger" type="submit">Apagar</button>
+    </form>
 <% } %>

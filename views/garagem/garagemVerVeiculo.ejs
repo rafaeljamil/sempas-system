@@ -1,0 +1,7 @@
+<div class="text-center">
+    <h3>Detalhes de <%=veiculo.marca%> <%=veiculo.modelo%></h3>
+</div>
+
+<form action="/garagem/veiculo/<%=veiculo.id%>?_method=PUT" method="post">
+    <%- include('__veiculoForm.ejs') %>
+</form>

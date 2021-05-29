@@ -23,8 +23,8 @@
         }
     </style>
 </head>
-<body class="bg-white h-100">
-    <div class="container-fluid">
+<body class="bg-white mw-100 mh-100">
+    <div class="container-fluid sticky-top">
         <div class="d-flex flex-wrap row ">
             <div class="col-sm-auto">
                 <img style="height:20vh; width:auto;" src="/public/images/logo-sempas-trim.jpeg" alt="Logo-sempas">
@@ -35,10 +35,10 @@
             </div> 
         </div>
     </div>
-    <div class="container-fluid bg-light h-75 d-inline-block">
-        <div class="row">
-            <div class="col-sm-auto">
-                <nav class="row justify-content-center">
+    <div class="container-fluid bg-light sidebar">
+        <div class="row sidebar-sticky">
+            <div class="col-sm-auto ">
+                <nav class="row justify-content-center ">
                     <ul class="col-sm-auto list-group">
                         <li><a class="row list-group-item text-decoration-none bg-secondary text-white" href="/">Home</a></li>
                         <li><a class="row list-group-item text-decoration-none bg-secondary text-white" href="/recepcao">Recepção</a></li>
@@ -47,8 +47,8 @@
                     </ul>
                 </nav>
             </div> 
-            <div class="col-lg bg-light ">
-                <div class="row row-offcanvas row-offcanvas-left overflow-auto mx-2 my-2">
+            <div style="border: 1px solid gray; height:70vh" class="col-lg bg-light mb-3 mx-2">
+                <div class="h-100 overflow-auto">
                     <% if(locals.mensagem) { %>
                         <p><%=mensagem%></p>
                     <% } %>
@@ -56,8 +56,8 @@
                 </div>
             </div>
         </div>
-        <div class="row justify-content-center bg-secondary text-white fixed-bottom">
-            <div class="col-lg-auto my-2">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-lg-auto my-1">
                 <%- include('../partials/footer')%>
             </div>
         </div>
