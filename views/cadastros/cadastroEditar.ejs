@@ -1,0 +1,14 @@
+<div class="container w-75">
+    <h2 class="text-center">Editar Cadastro</h2>
+    <form action="/cadastros/<%=cad.id%>?_method=PUT" method="POST">
+    <!-- Em vez de criar os campos pra preencher aqui, criou-se uma view parcial pra reaproveitar os campos na view edit -->
+        <%- include('__usuarioForm') %>
+        <div class="container-fluid justify-content-end">
+            <div class="col my-4">
+                <button class="btn btn-primary" type="submit">Atualizar</button>
+                <a class="btn btn-secondary" href="/cadastros/<%=cad.id%>">Cancelar</a>
+                <!-- <button class="btn btn-primary" type="submit">Criar</button> -->
+            </div>
+        </div>
+    </form>
+</div>

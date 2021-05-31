@@ -1,5 +1,5 @@
-<div style="border: 1px solid gray" class="container-fluid mt-2">
-    <h2>Últimas Rotas:</h2>
+<div style="border: 1px solid lightgray" class="container-fluid mt-2">
+    <h3>Últimas Rotas:</h3>
     <table class="table table-bordered">
         <thead>
             <tr>
@@ -23,8 +23,8 @@
                     <td class="col-md-auto"><%=r.destino%></td>
                     <td class="col-md-auto"><%=r.responsavel%></td>
                     <td class="col col-sm-2">
-                        <a class="d-inline btn btn-primary my-2" href="/garagem/rota/<%=r.id%>">Ver</a>
-                        <a class="d-inline"><%-include('../partials/deleteForm.ejs', {r:r, scope:"Rotas"})%></a>
+                        <a class="btn btn-primary my-1" href="/garagem/rota/<%=r.id%>">Ver</a>
+                        <a class="my-1"><%-include('../partials/deleteForm.ejs', {r:r, scope:"Rotas"})%></a>
                     </td>
                 </tr>
             </tbody>

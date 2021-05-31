@@ -1,0 +1,35 @@
+<div class="form-group">
+    <div class="row">
+        <div class="col">
+            <label for="dataVisita">Data da visita: </label>
+            <input class="form-control" type="date" name="dataVisita" value="<%=visita.dataVisita == null ? '' : visita.dataVisita.toISOString().split('T')[0] %>"> 
+        </div>
+        <div class="col">
+            <label for="localVisita">Local da visita: </label>
+            <select class="form-control" name="localVisita">
+                <option value="SEMPAS">SEMPAS</option>
+                <option value="Residência">Residência</option>
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <label for="motivoVisita">Motivo da Visita: </label>
+            <select class="form-control" name="motivoVisita">
+                <option value="Ajuda de Custo">Ajuda de Custo</option>
+                <option value="Cesta Básica">Cesta Básica</option>
+                <option value="Passagem">Passagem</option>
+            </select>
+        </div>
+        <div class="col">
+            <label for="valor">Valor: </label>
+            <input class="form-control" type="number" name="valor" value="<%=visita.valor%>">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <label for="observacoes">Observações:</label>
+            <textarea class="form-control" name="observacoes"><%=visita.observacoes%></textarea>
+        </div>
+    </div>
+</div>

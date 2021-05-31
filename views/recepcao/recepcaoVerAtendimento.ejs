@@ -1,0 +1,24 @@
+<div class="container row justify-content-center">
+    <div class="col-md-auto">
+        <label style="color:red;">*</label><label> - Campos Obrigatórios</label> 
+    </div>
+</div>
+
+<div class="container w-75">
+    <div class=" row justify-content-center">
+        <h3>Atendimento de <%=atendimento.nome%></h3>
+        <div class="container">
+            <div class= "form-group">
+                <div class="row">
+                    <form action="/recepcao/<%=atendimento.id%>?_method=PUT" method="post">
+                        <%-include ('__recepcaoForm.ejs')%>
+                        <div>
+                            <input class="btn btn-primary my-2" type="submit" value="Salvar">
+                            <a href="/recepcao" class="btn btn-secondary">Voltar</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

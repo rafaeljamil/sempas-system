@@ -1,8 +1,37 @@
-<h2 class="text-center">Cadastros recentes</h2>
-<% cadastros.forEach(cadastro => { %>
-    <div class="container">
-        <div class="row justify-content-md-center">
-            <a class="my-1 btn btn-secondary" href="cadastros/<%=cadastro.id%>"><%=cadastro.nome.nomeCompleto%></a>
+<% var vLen = 0 %>
+<% var cLen = 0 %>
+<% veiculos.forEach(v =>{ %>
+    <% vLen += 1 %>
+<% }) %>
+<% cadastros.forEach(c =>{ %>
+    <% cLen += 1 %>
+<% }) %>
+
+<div class="container w-75">
+    <div class="row justify-content-center">
+        <div class="col" style="border: 1px solid lightgray">
+            <h3 class="text-center">Garagem</h3>
+            <p class="text-center">Veículos: <%= vLen %></p>
+            <ul>
+                <% veiculos.forEach(v =>{ %>
+                    <li><p><%=v.marca%> <%=v.modelo%> - <%=v.placa%>. KM: <%=v.km%></p></li>
+                <% }) %>
+            </ul>
+        </div>
+        <div class="col" style="border: 1px solid lightgray">
+            <h3 class="text-center">Cadastros</h3>
+            <p class="text-center">Total de cadastros: <%= cLen %></p>
         </div>
     </div>
-<% }) %>
+    <div class="row" style="border: 1px solid lightgray">
+        <h3 class="text-center">Cadastros recentes</h3>
+        <p class="text-center">Clique no nome para abrir.</p>
+        <%- include('cadastros/__cadastrosTabela.ejs') %>
+    </div>
+</div>
+
+
+<div style="border: 1px solid lightgray" class="container w-75">
+
+</div>
+

@@ -1,0 +1,24 @@
+<div class="container w-100">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <!-- <th scope="col"></th> -->
+                <th scope="col">Nome</th>
+                <th scope="col">CPF</th>
+                <th scope="col">RG</th>
+                <th scope="col">NIS</th>
+            </tr>
+        </thead>
+        <% cad.forEach(c => { %>
+            <tbody>
+                <tr>
+                    <!-- <th scope="row"></th> -->
+                    <td class="col-md-auto"><a class="text-dark text-decoration-none" href="/cadastros/<%=c.id%>"><%=c.nome.nomeCompleto%></a></td>
+                    <td class="col-md-auto"><%=c.cpf%></td>
+                    <td class="col-md-auto"><%=c.rg.numero%></td>
+                    <td class="col-md-auto"><%=c.nis%></td>
+                </tr>
+            </tbody>
+        <% }) %>
+    </table>
+</div>

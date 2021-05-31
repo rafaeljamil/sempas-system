@@ -2,25 +2,27 @@
     <div class="row justify-content-center">
         <div class="col-6">
             <label for="placa">Veículo: </label>
-            <select name="placa">
+            <select class="form-control" name="placa">
                 <% veiculos.forEach(v => { %>
-                    <option class="form-control" value="<%= v.placa %>"><%= v.placa %></option>
+                    <option value="<%= v.placa %>"><%= v.placa %></option>
                 <% }) %>
-            </select><br>
+            </select>
             <label for="km-inicial">KM inicial: </label>
-            <input class="form-control" type="number" name="kmInicial">
+            <input class="form-control" type="number" name="kmInicial" value="<%= rota.kmInicial %>">
             <label for="km-final">KM final: </label>
-            <input class="form-control" type="number" name="kmFinal">
+            <input class="form-control" type="number" name="kmFinal" value="<%= rota.kmFinal %>">
+        </div>
+        <div class="col-6">
             <label for="origem">Origem: </label>
-            <input class="form-control" type="text" name="origem">
+            <input class="form-control" type="text" name="origem" value="<%= rota.origem %>">
             <label for="destino">Destino: </label>
-            <input class="form-control" type="text" name="destino">
+            <input class="form-control" type="text" name="destino" value="<%= rota.destino %>">
             <label for="responsavel">Responsável: </label>
-            <input class="form-control" type="text" name="responsavel">
-            <div class="mt-2">
-                <button class="btn btn-primary" type="submit">Salvar</button>
-                <a class="btn btn-secondary" href="/garagem">Voltar</a>
-            </div>
+            <input class="form-control" type="text" name="responsavel" value="<%= rota.responsavel %>">
+        </div>
+        <div class="mt-2">
+            <button class="btn btn-primary" type="submit">Salvar</button>
+            <a class="btn btn-secondary" href="/garagem">Voltar</a>
         </div>
     </div>
 </div>

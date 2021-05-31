@@ -7,6 +7,8 @@ const fs = require('fs')
 const path = require('path')
 const router = express.Router({mergeParams:true})
 
+
+//GET
 router.get('/', async (req,res) => {
     //console.log(req.params.id)
     const visita = await Visita.findById(req.params.id).populate('visitas').exec()
@@ -16,10 +18,19 @@ router.get('/', async (req,res) => {
         res.redirect(`/cadastros/${visita.usuarioId}/visitas/${visita.id}`)
         console.log("Não permitido mais de um relatório por visita")
     }
-    res.render('partials/relatorioForm.ejs', {visita:visita})
+    res.render('relatorio/__relatorioForm.ejs', {visita:visita})
     //console.log(visita.relatorioId)
 })
 
+router.get('/editar', async (req,res) => {
+    const visita = await Visita.findById(req.params.id)
+    const rel = await Relatorio.findOne({visitaId: req.params.id}).populate('relatoriossociais')
+    //console.log(rel.id)
+    res.render('relatorio/relatorioEditar', {visita:visita, rel:rel})
+})
+
+
+//POST
 router.post('/', async (req,res) => {
     let visita = await Visita.findById(req.params.id).populate('visitas')
     let relatorio = req.body.body
@@ -41,13 +52,8 @@ router.post('/', async (req,res) => {
     res.redirect(`/cadastros/${visita.usuarioId}/visitas/${req.params.id}`)
 })
 
-router.get('/editar', async (req,res) => {
-    const visita = await Visita.findById(req.params.id)
-    const rel = await Relatorio.findOne({visitaId: req.params.id}).populate('relatoriossociais')
-    //console.log(rel.id)
-    res.render('partials/editarRelatorio', {visita:visita, rel:rel})
-})
 
+//PUT
 router.put('/editar', async (req,res) => {
     try{
         const rel = await Relatorio.findOne({visitaId: req.params.id})
@@ -61,6 +67,8 @@ router.put('/editar', async (req,res) => {
     //res.send('Rota de editar')
 })
 
+
+//DELETE
 router.delete('/deletar', async (req,res) => {
     try{
         const visita = await Visita.findById(req.params.id)

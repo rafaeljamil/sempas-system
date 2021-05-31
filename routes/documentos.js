@@ -24,6 +24,7 @@ const upload = multer({
 })
 
 
+//GET
 router.get('/', async (req,res) => {
     try{
         const cad = await Cadastro.findById(req.params.id).populate('usuario').exec()
@@ -33,6 +34,8 @@ router.get('/', async (req,res) => {
     }
 })
 
+
+//POST
 router.post('/', upload.any(), async (req,res) => {
     //Tentando criar uma lógica pra substituir documento se já existe 
     //ou criar se ainda não existe. Ainda não deu certo
@@ -81,6 +84,8 @@ router.post('/', upload.any(), async (req,res) => {
     }
 })
 
+
+//DELETE
 router.delete('/deletar', async (req,res) => {
     cad = await Cadastro.findById(req.params.id).populate('usuario')
     docs = await Docs.findOne({usuarioId: req.params.id})

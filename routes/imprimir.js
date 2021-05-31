@@ -8,10 +8,11 @@ const fs = require('fs')
 const path = require('path')
 const htmlToPdf = require('html-pdf')
 
-
 const imagePath = path.resolve(__filename ,'../../public/images/')
 //console.log(imagePath)
 
+
+//GET
 router.get('/', async (req,res) => {
     let visita = await Visita.findById(req.params.id)
     let cad = await Cadastro.findById(visita.usuarioId)

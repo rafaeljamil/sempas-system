@@ -14,7 +14,7 @@
     <% }) %>
 <% } %>
 
-<div class="container">
+<div class="container w-75">
     <div class="row justify-content-center">
         <div class="col">
             <h2 class="text-center">Recepção</h2>
@@ -30,7 +30,13 @@
             <p class="text-center">Atendimentos no ano <%=ano%>: <%=totalAno%>. Mês de <%=meses[mes]%>: <%=totalMes%></p>  
         </div>
     </div>
-    <div class="row">
-        <%- include('../partials/tabelaRecepcao.ejs') %>
+    <div  style="border: 1px solid lightgray" class="row">
+        
+            
+            <%- include('__recepcaoTabela.ejs') %>
+        
     </div>
 </div>
+
+
+

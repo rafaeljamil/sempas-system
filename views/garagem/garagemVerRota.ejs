@@ -1,8 +1,8 @@
 <div class="text-center">
-    <h3>Nova rota</h3>
+    <h3>Detalhes da Rota</h3>
 </div>
 <div class="container w-75">
-    <form action="" method="post">
+    <form action="/garagem/rota/<%=rota.id%>?_method=PUT" method="post">
         <%- include('__rotaForm.ejs') %>
     </form>
 </div>

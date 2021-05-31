@@ -9,6 +9,8 @@ const imprimirRoute = require('../routes/imprimir')
 router.use('/:id/relatorio', relatorioRoute)
 router.use('/:id/imprimir', imprimirRoute)
 
+
+//GET
 router.get("/", async (req,res) => {
     const cad = await Cadastro.findById(req.params.id)
     const rel = await Relatorio.findOne({usuarioId: req.params.id})
@@ -16,6 +18,20 @@ router.get("/", async (req,res) => {
     res.render("visitas/novaVisita", {cad:cad, rel:rel})
 })
 
+router.get("/:id", async (req,res) => {
+    let visita = await Visita.findById(req.params.id)
+    let cad = await Cadastro.findById(visita.usuarioId)
+    let rel = await Relatorio.findOne({visitaId:visita.id})
+    try{
+        res.render("visitas/verVisita", {visita:visita, cad:cad, rel:rel})
+    }
+    catch{
+        res.redirect(`/cadastros/${cad.id}`)
+    }
+})
+
+
+//POST
 router.post("/", async (req,res) => {
     let visita = new Visita({
         usuarioId: req.params.id,
@@ -35,18 +51,8 @@ router.post("/", async (req,res) => {
     }
 })
 
-router.get("/:id", async (req,res) => {
-    let visita = await Visita.findById(req.params.id)
-    let cad = await Cadastro.findById(visita.usuarioId)
-    let rel = await Relatorio.findOne({visitaId:visita.id})
-    try{
-        res.render("visitas/verVisita", {visita:visita, cad:cad, rel:rel})
-    }
-    catch{
-        res.redirect(`/cadastros/${cad.id}`)
-    }
-})
 
+//PUT
 router.put("/:id", async (req,res) => {
     let visita = await Visita.findById(req.params.id)
     let cad = await Cadastro.findById(visita.usuarioId)
@@ -65,6 +71,8 @@ router.put("/:id", async (req,res) => {
     }
 })
 
+
+//DELETE
 router.delete("/:id/deletar", async (req,res) => {
     let visita = await Visita.findById(req.params.id)
     let cad = await Cadastro.findById(visita.usuarioId)

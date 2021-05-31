@@ -23,11 +23,11 @@
         }
     </style>
 </head>
-<body class="bg-white mw-100 mh-100">
+<body class="bg-light mw-100 mh-100">
     <div class="container-fluid sticky-top">
         <div class="d-flex flex-wrap row ">
             <div class="col-sm-auto">
-                <img style="height:20vh; width:auto;" src="/public/images/logo-sempas-trim.jpeg" alt="Logo-sempas">
+                <img style="height:20vh; width:auto;" src="/public/images/logo-sempas.png" alt="Logo-sempas">
             </div>
             <div class="col-lg-auto text-center">
                 <h1>Secretaria Municipal de Promoção e Assistência Social</h1>
@@ -35,19 +35,19 @@
             </div> 
         </div>
     </div>
-    <div class="container-fluid bg-light sidebar">
-        <div class="row sidebar-sticky">
-            <div class="col-sm-auto ">
-                <nav class="row justify-content-center ">
-                    <ul class="col-sm-auto list-group">
-                        <li><a class="row list-group-item text-decoration-none bg-secondary text-white" href="/">Home</a></li>
-                        <li><a class="row list-group-item text-decoration-none bg-secondary text-white" href="/recepcao">Recepção</a></li>
-                        <li><a class="row list-group-item text-decoration-none bg-secondary text-white" href="/cadastros">Cadastros</a></li>
-                        <li><a class="row list-group-item text-decoration-none bg-secondary text-white" href="/garagem">Garagem</a></li>
+    <div class="container-fluid bg-light">
+        <div class="row">
+            <div class="col-sm-auto">
+                <nav class="row">
+                    <ul class="col-sm-auto list-unstyled list-group">
+                        <li><a class="list-group-item list-group-item-action bg-light text-dark" href="/">Painel</a></li>
+                        <li><a class="list-group-item list-group-item-action bg-light text-dark" href="/recepcao">Recepção</a></li>
+                        <li><a class="list-group-item list-group-item-action bg-light text-dark" href="/cadastros">Cadastros</a></li>
+                        <li><a class="list-group-item list-group-item-action bg-light text-dark" href="/garagem">Garagem</a></li>
                     </ul>
                 </nav>
             </div> 
-            <div style="border: 1px solid gray; height:70vh" class="col-lg bg-light mb-3 mx-2">
+            <div style="border: 1px solid lightgray; height:70vh" class="col-lg bg-light mb-3">
                 <div class="h-100 overflow-auto">
                     <% if(locals.mensagem) { %>
                         <p><%=mensagem%></p>

@@ -11,10 +11,10 @@ const visitasRoute = require('../routes/visitas')
 router.use('/:id/docs', docsRoute) 
 router.use('/:id/visitas', visitasRoute) 
 
-//console.log(upload)
 
+//GET
 router.get('/', (req,res) => {
-    res.render('cadastros', {cad:false})
+    res.render('cadastros/cadastros', {cad:false})
 })
 
 router.get('/busca', async (req,res) => {
@@ -30,7 +30,7 @@ router.get('/busca', async (req,res) => {
         const cad = await Cadastro.find({"nome.nomeCompleto": busca})
         //res.send("Buscou por:" + cad)
         //console.log(cad)
-        res.render('cadastros/index', {cad:cad})
+        res.render('cadastros/cadastros', {cad:cad})
     }catch(err){
         if (busca == null || busca == ''){
             res.redirect('/cadastros', {cad:cad})
@@ -41,9 +41,36 @@ router.get('/busca', async (req,res) => {
 })
 
 router.get('/novo', (req,res) => {
-    res.render('cadastros/novo', {cad: new Cadastro()})
+    res.render('cadastros/cadastroNovo', {cad: new Cadastro()})
 })
 
+router.get('/:id', async (req,res) => {
+    try{
+        //res.send("página do usuário cadastrado")
+        let cad = await Cadastro.findById(req.params.id).populate('usuario').exec()
+        let docs = await Docs.findOne({usuarioId: req.params.id}).populate('documentos').exec()
+        let visita = await Visita.find({usuarioId: req.params.id}).populate('visitas').sort({dataVisita: 'asc'})
+        //console.log(visita)
+        //console.log(docs.rgFrenteImagem)
+        res.render('cadastros/cadastroVer', {cad:cad, docs:docs, visita:visita, scope:""})
+    }catch{
+        res.redirect('/')
+    }
+})
+
+router.get('/:id/editar', async (req,res) => {
+    let cad
+    try{
+        cad = await Cadastro.findById(req.params.id).populate('usuario').exec()
+        res.render('cadastros/cadastroEditar', {cad:cad})
+    }catch(err){
+        console.log(err)
+        res.redirect(`/cadastros/${req.params.id}`)
+    }
+})
+
+
+//POST
 router.post('/novo', async (req,res) => {
     let cadastro = new Cadastro({
         nome:{
@@ -84,31 +111,8 @@ router.post('/novo', async (req,res) => {
     }
 })
 
-router.get('/:id', async (req,res) => {
-    try{
-        //res.send("página do usuário cadastrado")
-        let cad = await Cadastro.findById(req.params.id).populate('usuario').exec()
-        let docs = await Docs.findOne({usuarioId: req.params.id}).populate('documentos').exec()
-        let visita = await Visita.find({usuarioId: req.params.id}).populate('visitas').sort({dataVisita: 'asc'})
-        //console.log(visita)
-        //console.log(docs.rgFrenteImagem)
-        res.render('cadastros/ver', {cad:cad, docs:docs, visita:visita, scope:""})
-    }catch{
-        res.redirect('/')
-    }
-})
 
-router.get('/:id/editar', async (req,res) => {
-    let cad
-    try{
-        cad = await Cadastro.findById(req.params.id).populate('usuario').exec()
-        res.render('cadastros/editar', {cad:cad})
-    }catch(err){
-        console.log(err)
-        res.redirect(`/cadastros/${req.params.id}`)
-    }
-})
-
+//PUT
 router.put('/:id', async (req,res) => {
     let cad
     try{
@@ -147,10 +151,12 @@ router.put('/:id', async (req,res) => {
         if (cad == null){
             res.redirect('/')
         }
-        res.render('cadastros/editar', { cad:cad, errorMessage: "Erro ao editar cadastro." })
+        res.render('cadastros/cadastroEditar', { cad:cad, errorMessage: "Erro ao editar cadastro." })
     }
 })
 
+
+//DELETE
 router.delete('/:id/deletar', async (req,res) => {
     let cadas
     let docs

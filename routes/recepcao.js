@@ -2,6 +2,8 @@ const express = require('express')
 const router = express.Router()
 const Atendimento = require('../models/atendimentos')
 
+
+//GET
 router.get('/', async (req,res) => {
     atendimento = await Atendimento.find({})
     res.render('recepcao/recepcao', {atendimento:atendimento})
@@ -10,9 +12,16 @@ router.get('/', async (req,res) => {
 
 router.get('/novo', (req,res) => {
     atendimento = new Atendimento()
-    res.render('partials/recepForm', {atendimento:atendimento})
+    res.render('recepcao/recepcaoNovoAtendimento', {atendimento:atendimento})
 })
 
+router.get('/:id', async (req,res) => {
+    let atendimento = await Atendimento.findById(req.params.id)
+    res.render('recepcao/recepcaoVerAtendimento', {atendimento:atendimento})
+})
+
+
+//POST
 router.post('/novo', async (req,res)=>{
     const atendimento = new Atendimento({
         nome:req.body.nome,
@@ -34,14 +43,29 @@ router.post('/novo', async (req,res)=>{
         res.redirect('/')
     }
 })
-router.get('/:id', async (req,res) => {
-    res.send('ver')
+
+
+//PUT
+router.put('/:id', async (req,res) => {
+    let atendimento = await Atendimento.findById(req.params.id)
+    try{
+        atendimento.nome = req.body.nome,
+        atendimento.endereco = req.body.endereco,
+        atendimento.rg = req.body.rg,
+        atendimento.cpf = req.body.cpf,
+        atendimento.nis = req.body.nis,
+        atendimento.atendimento = req.body.atendimento
+
+        let save = await atendimento.save()
+        console.log('Atendimento modificado com sucesso.')
+        res.redirect('/recepcao')
+    }catch{
+        res.redirect('/')
+    }
 })
 
-router.post('/:id', async (req,res) => {
-    res.send('modificar')
-})
 
+//DELETE
 router.delete('/:id/deletar', async (req,res) => {
     //res.send("deletar")
     const atendimento = await Atendimento.findById(req.params.id)
