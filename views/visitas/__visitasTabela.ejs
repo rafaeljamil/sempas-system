@@ -19,7 +19,7 @@
                 <% visita.forEach(vis =>{ %>
                     <tbody>
                         <!-- <th scope="row" ></th> -->
-                        <td><%=vis.dataVisita.getDate() %>/<%= vis.dataVisita.getMonth() + 1 %>/<%= vis.dataVisita.getFullYear() %></td>
+                        <td><%=vis.dataVisita.getDate() + 1 %>/<%= vis.dataVisita.getMonth() + 1 %>/<%= vis.dataVisita.getFullYear() %></td>
                         <td><%= vis.local.toUpperCase() %></td>
                         <td><%= vis.motivo %></td>
                         <td>R$ <%= vis.valor %></td>

@@ -6,13 +6,15 @@
         <div class="text-center" >
             <h3><%=cad.nome.nomeCompleto%></h3>
         </div>
-        <form action="" method="post">
-            <%-include('__visitaForm.ejs')%>
-            <button class="btn btn-primary my-2" type="submit">Salvar</button>
-            <a class="btn btn-secondary" href="/cadastros/<%=cad.id%>">Voltar</a>
+        <form action="/cadastros/<%=cad.id%>/visitas/<%=visita.id%>?_method=PUT" method="post">
+            <div class="w-100">
+                <%-include('__visitaForm.ejs')%>
+                <button class="btn btn-primary my-2" type="submit">Salvar</button>
+                <a class="btn btn-secondary" href="/cadastros/<%=cad.id%>">Voltar</a>
+            </div>
         </form>
     </div>
-    <div>
+    <div class="w-100">
         <%-include('../relatorio/relatorioVer')%>
         <a href="/cadastros/<%=cad.id%>/visitas/<%=visita.id%>/imprimir" class="my-2 btn btn-secondary">Imprimir Relatório Completo</a>
     </div>

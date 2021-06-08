@@ -1,47 +1,15 @@
-<div class="container">
+<div class="container w-75">
     <div class="d-flex justify-content-center" >
         <h2>Nova visita</h2>
     </div>
     <div class="d-flex justify-content-center" >
         <h3><%=cad.nome.nomeCompleto%></h3>
     </div>
-    <form action="" method="post">
-        <div class="form-group">
-            <div class="row">
-                <div class="col">
-                    <label for="dataVisita">Data da visita: </label>
-                    <input class="form-control" type="date" name="dataVisita"> 
-                </div>
-                <div class="col">
-                    <label for="localVisita">Local da visita: </label>
-                    <select class="form-control" name="localVisita">
-                        <option value="sempas" selected>SEMPAS</option>
-                        <option value="residencia">Residência</option>
-                    </select>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <label for="motivoVisita">Motivo da Visita: </label>
-                    <select class="form-control" name="motivoVisita">
-                        <option value="Ajuda de Custo">Ajuda de Custo</option>
-                        <option value="Cesta Básica">Cesta Básica</option>
-                        <option value="Passagem">Passagem</option>
-                    </select>
-                </div>
-                <div class="col">
-                    <label for="valor">Valor: </label>
-                    <input class="form-control" type="number" name="valor">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <label for="observacoes">Observações:</label>
-                    <textarea class="form-control" name="observacoes"></textarea>
-                </div>
-            </div>
-        </div>
-        <button class="btn btn-primary my-2" type="submit">Salvar</button>
-        <a class="btn btn-secondary"href="/cadastros/<%=cad.id%>">Voltar</a>
-    </form>
+    <div class="w-100">
+        <form action="" method="post">
+            <%-include('__visitaForm.ejs')%>
+            <button class="btn btn-primary my-2" type="submit">Salvar</button>
+            <a class="btn btn-secondary"href="/cadastros/<%=cad.id%>">Voltar</a>
+        </form>
+    </div>
 </div>

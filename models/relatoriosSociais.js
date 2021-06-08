@@ -30,10 +30,10 @@ const relatorioSocialSchema = mongoose.Schema({
     // }
 })
 
-relatorioSocialSchema.virtual('relatorioPath').get(function(){
-    if(this.relatorio != null){
-        return path.join('./public/', caminhoBaseRels,  this.relatorio)
-    }
-})
+// relatorioSocialSchema.virtual('relatorioPath').get(function(){
+//     if(this.relatorio != null){
+//         return path.join('./public/', caminhoBaseRels,  this.relatorio)
+//     }
+// })
 
 module.exports = mongoose.model('relatoriossociais', relatorioSocialSchema)

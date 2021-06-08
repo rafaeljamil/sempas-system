@@ -14,15 +14,17 @@ router.use('/:id/imprimir', imprimirRoute)
 router.get("/", async (req,res) => {
     const cad = await Cadastro.findById(req.params.id)
     const rel = await Relatorio.findOne({usuarioId: req.params.id})
+    const visita = new Visita()
     //console.log(rel.relatorioPath)
-    res.render("visitas/novaVisita", {cad:cad, rel:rel})
+    res.render("visitas/novaVisita", {cad:cad, rel:rel, visita:visita})
 })
 
 router.get("/:id", async (req,res) => {
     let visita = await Visita.findById(req.params.id)
-    let cad = await Cadastro.findById(visita.usuarioId)
+    let cad = await Cadastro.findOne({id:visita.usuarioId})
     let rel = await Relatorio.findOne({visitaId:visita.id})
     try{
+        console.log (cad)
         res.render("visitas/verVisita", {visita:visita, cad:cad, rel:rel})
     }
     catch{
@@ -35,13 +37,14 @@ router.get("/:id", async (req,res) => {
 router.post("/", async (req,res) => {
     let visita = new Visita({
         usuarioId: req.params.id,
-        dataVisita: req.body.dataVisita,
-        local: req.body.localVisita,
-        motivo: req.body.motivoVisita,
+        dataVisita: req.body.data,
+        local: req.body.local,
+        motivo: req.body.motivo,
         valor: req.body.valor,
         observacoes: req.body.observacoes
     })
     try{
+        console.log(req.body)
         visita.save()
         console.log('Visita salva com sucesso.')
         res.redirect(`/cadastros/${req.params.id}`)
@@ -58,9 +61,9 @@ router.put("/:id", async (req,res) => {
     let cad = await Cadastro.findById(visita.usuarioId)
     try{
         visita.usuarioId = req.params.id,
-        visita.dataVisita = req.body.dataVisita,
-        visita.local = req.body.localVisita,
-        visita.motivo = req.body.motivoVisita,
+        visita.dataVisita = req.body.data,
+        visita.local = req.body.local,
+        visita.motivo = req.body.motivo,
         visita.valor = req.body.valor,
         visita.observacoes = req.body.observacoes
         await visita.save()
@@ -78,7 +81,9 @@ router.delete("/:id/deletar", async (req,res) => {
     let cad = await Cadastro.findById(visita.usuarioId)
     let rel = await Relatorio.findOne({visitaId:visita.id})
     try{
-        await rel.remove()
+        if(rel){
+            await rel.remove()
+        }
         await visita.remove()
         console.log("Visita e relatório apagados com sucesso.")
         res.redirect(`/cadastros/${cad.id}`)
