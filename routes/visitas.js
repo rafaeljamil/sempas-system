@@ -21,10 +21,10 @@ router.get("/", async (req,res) => {
 
 router.get("/:id", async (req,res) => {
     let visita = await Visita.findById(req.params.id)
-    let cad = await Cadastro.findOne({id:visita.usuarioId})
+    let cad = await Cadastro.findById(visita.usuarioId)
     let rel = await Relatorio.findOne({visitaId:visita.id})
     try{
-        console.log (cad)
+        //console.log (cad)
         res.render("visitas/verVisita", {visita:visita, cad:cad, rel:rel})
     }
     catch{
@@ -44,7 +44,7 @@ router.post("/", async (req,res) => {
         observacoes: req.body.observacoes
     })
     try{
-        console.log(req.body)
+        //console.log(req.body)
         visita.save()
         console.log('Visita salva com sucesso.')
         res.redirect(`/cadastros/${req.params.id}`)

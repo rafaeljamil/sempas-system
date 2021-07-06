@@ -25,7 +25,7 @@ router.get('/', async (req,res) => {
         const doc = new pdf()
         //const breaker = '_'
         const mes = cad.rg.dataEmissao.getMonth()+1
-        //criar PDF
+        //criar PDF 
         console.log("Gerando documento...")
         doc.pipe(fs.createWriteStream('modelo.pdf'))
         doc.pipe(res)
@@ -54,7 +54,7 @@ router.get('/', async (req,res) => {
             'Estado: ' + cad.endereco.estado + '. ' 
         ).moveDown(1)
         doc.fontSize(16).text('Relatório da visita:')
-        doc.fontSize(12).text(relatorio)
+        doc.fontSize(12).text(rel.pdfBlob)
         doc.end()
         console.log("Documento gerado com sucesso.")
     }

@@ -28,7 +28,7 @@ const upload = multer({
 router.get('/', async (req,res) => {
     try{
         const cad = await Cadastro.findById(req.params.id).populate('usuario').exec()
-        res.render('partials/docsForm', {cad:cad})
+        res.render('documentos/__documentosForm', {cad:cad})
     }catch{
         res.redirect('/'+req.params.id)
     }

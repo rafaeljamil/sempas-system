@@ -7,8 +7,13 @@
         <div class="col">
             <label for="local">Local da visita: </label>
             <select class="form-control" name="local">
-                <option value="SEMPAS">SEMPAS</option>
-                <option value="Residência">Residência</option>
+                <% if(visita.local == 'SEMPAS') {%>
+                    <option value="SEMPAS" selected>SEMPAS</option>
+                    <option value="Residência">Residência</option>
+                <% } else { %>
+                    <option value="SEMPAS">SEMPAS</option>
+                    <option value="Residência" selected>Residência</option>
+                <% } %>
             </select>
         </div>
     </div>
@@ -16,9 +21,19 @@
         <div class="col">
             <label for="motivo">Motivo da Visita: </label>
             <select class="form-control" name="motivo">
-                <option value="Ajuda de Custo">Ajuda de Custo</option>
-                <option value="Cesta Básica">Cesta Básica</option>
-                <option value="Passagem">Passagem</option>
+                <% if (visita.motivo == 'Ajuda de Custo') { %>
+                    <option value="Ajuda de Custo" selected>Ajuda de Custo</option>
+                    <option value="Cesta Básica">Cesta Básica</option>
+                    <option value="Passagem">Passagem</option>
+                <% }else if (visita.motivo == 'Cesta Básica') { %>
+                    <option value="Ajuda de Custo">Ajuda de Custo</option>
+                    <option value="Cesta Básica" Selected>Cesta Básica</option>
+                    <option value="Passagem">Passagem</option>
+                <% } else if (visita.motivo == 'Passagem') { %>
+                    <option value="Ajuda de Custo">Ajuda de Custo</option>
+                    <option value="Cesta Básica">Cesta Básica</option>
+                    <option value="Passagem" selected>Passagem</option>
+                <% } %>
             </select>
         </div>
         <div class="col">
